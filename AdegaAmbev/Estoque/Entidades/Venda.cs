@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AdegaAmbev.Estoque.Entidades
 {
-    public class Venda: EntidadeBase
+    public class Venda: EntidadeBase // Verificar como fazer ID incremental.
     {
         protected Venda()
         {

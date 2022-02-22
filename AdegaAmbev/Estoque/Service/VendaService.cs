@@ -27,16 +27,18 @@ namespace AdegaAmbev.Estoque.Service
             // Fazer menu para tipo venda.
             var tipoVenda = (TipoVenda)Convert.ToInt32(Console.ReadLine());
 
-            var produtos = new List<Produto>();
+            var produtos = new List<Produto.Entidades.Produto>();
             var vendaItens = new List<VendaItem>();
             AdicionarItens(vendaItens, produtos);
 
-            var valorTotal = CalcularValorTotal(vendaItens, produtos);
+            //var valorTotal = CalcularValorTotal(vendaItens, produtos);
+            var valorTotal = 100.32;
             var venda = new Venda(codigoCliente, valorTotal, vendaItens, tipoVenda);
 
+            vendaRepository.Create(venda);
         }
 
-        private static void AdicionarItens(List<VendaItem> itens, List<Produto> produtos)
+        private static void AdicionarItens(List<VendaItem> itens, List<Produto.Entidades.Produto> produtos)
         {
 
             var adicionarNovoProduto = "S";
@@ -65,17 +67,17 @@ namespace AdegaAmbev.Estoque.Service
             
         }
 
-        private static double CalcularValorTotal(List<VendaItem> vendaItens, List<Produto> produtos)
-        {
-            var valorTotal = 0;
+        //private static double CalcularValorTotal(List<VendaItem> vendaItens, List<Produto.Entidades.Produto> produtos)
+        //{
+        //    double valorTotal = 0.0;
 
-            Parallel.ForEach(vendaItens, item =>
-            {
-                var produto = produtos.SingleOrDefault(x => x.Id == item.ProdutoId);
-                valorTotal += produto.Valor * item.Quantidade;
-            });
+        //    Parallel.ForEach(vendaItens, item =>
+        //    {
+        //        var produto = produtos.SingleOrDefault(x => x.Id == item.ProdutoId);
+        //        valorTotal += produto.Valor * Convert.ToDouble(item.Quantidade);
+        //    });
 
-            return valorTotal;
-        }
+        //    return valorTotal;
+        //}
     }
 }

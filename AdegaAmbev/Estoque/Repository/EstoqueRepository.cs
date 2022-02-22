@@ -7,7 +7,7 @@ namespace AdegaAmbev.Estoque.Repository
 {
     public class EstoqueRepository
     {
-        public string Host { get; set; }
+        private string Host { get; set; }
 
         public EstoqueRepository()
         {

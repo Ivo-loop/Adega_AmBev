@@ -7,7 +7,7 @@ namespace AdegaAmbev.Estoque.Repository
 {
     public class VendaRepository
     {
-        public string Host { get; set; }
+        private string Host { get; set; }
 
         public VendaRepository()
         {
@@ -25,6 +25,7 @@ namespace AdegaAmbev.Estoque.Repository
             }
             
             var bancoSerializado = JsonSerializer.Deserialize<List<Venda>>(banco);
+            bancoSerializado.Add(venda);
             File.WriteAllText(Host, JsonSerializer.Serialize(bancoSerializado));
 
         }
