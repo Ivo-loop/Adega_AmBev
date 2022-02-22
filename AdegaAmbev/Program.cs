@@ -1,4 +1,4 @@
-﻿using System;
+﻿using AdegaAmbev.Estoque.Menu;
 
 namespace AdegaAmbev
 {
@@ -11,7 +11,7 @@ namespace AdegaAmbev
 
         public static void StartupSnake()
         {
-            // chamar intefaces aqui para inicializar.
+            GrupoDMenu.Iniciar();
         }
     }
 }
