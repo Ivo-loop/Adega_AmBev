@@ -6,10 +6,10 @@ namespace AdegaAmbev
     {
         static void Main(string[] args)
         {
-            Startup();
+            StartupSnake();
         }
 
-        public static void Startup()
+        public static void StartupSnake()
         {
             // chamar intefaces aqui para inicializar.
         }
