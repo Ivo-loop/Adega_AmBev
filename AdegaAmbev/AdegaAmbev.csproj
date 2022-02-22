@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Cliente\Entidades\" />
+    <Folder Include="Cliente\Console\" />
+    <Folder Include="Cliente\Service\" />
+    <Folder Include="Comum\" />
+    <Folder Include="Estoque\Console\" />
+    <Folder Include="Estoque\Entidades\" />
+    <Folder Include="Estoque\Service\" />
+    <Folder Include="Produto\Console\" />
+    <Folder Include="Produto\Entidades\" />
+    <Folder Include="Produto\Service\" />
+  </ItemGroup>
+
+</Project>
