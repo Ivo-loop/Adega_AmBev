@@ -1,6 +1,6 @@
 using AdegaAmbev.Comum.Entidades;
 
-namespace AdegaAmbev.Produto.Entidades {
+namespace AdegaAmbev.Produtos.Entidades {
     public class TipoBebida : EntidadeBase
     {
         public string Nome {get; set;}
