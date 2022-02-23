@@ -1,4 +1,9 @@
 using AdegaAmbev.Clientes.Entidades;
+using System.Text.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace AdegaAmbev.Clientes.Service
 {
@@ -17,20 +22,22 @@ namespace AdegaAmbev.Clientes.Service
             return "sucesso";
         }
 
-        public void CadastrarCliente(Cliente cliente){
+        public async Task CadastrarCliente(Cliente cliente){
+            string fileName = "Banco/Cliente.txt";
             var validação = ValidarCliente(cliente);
 
             if (validação != "sucesso")
                 return;
             
-            /*todo: verificar se o cliente existe
-            if (cliente existe){
-                Console.WriteLine("Cliente já cadastrado")
+            if (File.ReadAllLines(fileName).Any(line => line.Contains(cliente.Email))){
+                Console.WriteLine("Cliente já cadastrado");
             }
             else{
-                salvar o cliente no banco
+                var quantidadeLinhas = File.ReadLines(fileName).Count();
+                cliente.Id = ++quantidadeLinhas;
+                string[] linhas = {JsonSerializer.Serialize(cliente)};
+                await File.AppendAllLinesAsync(fileName, linhas);
             }
-            */
         }
     }
 }
