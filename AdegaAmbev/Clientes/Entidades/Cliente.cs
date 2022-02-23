@@ -1,7 +1,6 @@
-using System;
-using AdegaAmbev.Comum.Entidade;
+using AdegaAmbev.Comum.Entidades;
 
-namespace AdegaAmbev.Cliente.Entidade
+namespace AdegaAmbev.Clientes.Entidades
 {
     public class Cliente : EntidadeBase
     {
