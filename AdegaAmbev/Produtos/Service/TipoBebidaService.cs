@@ -19,7 +19,8 @@ namespace AdegaAmbev.Produtos.Service {
             using FileStream stream = File.OpenRead(Host);
             var tipoBebidaDb = JsonSerializer.DeserializeAsync<List<TipoBebida>>(stream).Result;
             stream.Close();
-            tipoBebida.Id = tipoBebidaDb.Count + 1;
+            var qtdTipoBebida = tipoBebidaDb.Count;
+            tipoBebida.SetId(++qtdTipoBebida);
             tipoBebidaDb.Add(tipoBebida);
 
             File.WriteAllText(Host, JsonSerializer.Serialize(tipoBebidaDb));

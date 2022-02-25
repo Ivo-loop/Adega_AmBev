@@ -1,7 +1,5 @@
 using AdegaAmbev.Clientes.Menu;
 using AdegaAmbev.Produtos.Entidades;
-using AdegaAmbev.Produtos.Entidades;
-using AdegaAmbev.Produtos.Repositorio;
 using System;
 using AdegaAmbev.Estoque.Menu;
 

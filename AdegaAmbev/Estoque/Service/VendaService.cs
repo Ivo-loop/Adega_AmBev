@@ -60,7 +60,7 @@ namespace AdegaAmbev.Estoque.Service
             Console.WriteLine("");
             var tipoVenda = (TipoVenda)Convert.ToInt32(Console.ReadLine());
 
-            var produtos = new List<Produto.Entidades.Produto>();
+            var produtos = new List<Produtos.Entidades.Produto>();
             var vendaItens = new List<VendaItem>();
             AdicionarItens(vendaItens, produtos);
 
@@ -88,7 +88,7 @@ namespace AdegaAmbev.Estoque.Service
             Console.ReadLine();
         }
 
-        private static void AdicionarItens(List<VendaItem> itens, List<Produto.Entidades.Produto> produtos)
+        private static void AdicionarItens(List<VendaItem> itens, List<Produtos.Entidades.Produto> produtos)
         {
 
             string adicionarNovoProduto;

@@ -43,7 +43,7 @@ namespace AdegaAmbev.Clientes.Service
             else
             {
                 var qtdClientes = clientes.Count();
-                cliente.Id = ++qtdClientes;
+                cliente.SetId(++qtdClientes);
                 clientes.Add(cliente);
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(clientes, Newtonsoft.Json.Formatting.Indented);
                 File.WriteAllText(fileName, json);
