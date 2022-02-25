@@ -1,16 +1,20 @@
-using System;
-using System.Text.Json;
-using AdegaAmbev.Produtos.Entidades;
+﻿using AdegaAmbev.Produtos.Entidades;
 using AdegaAmbev.Produtos.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
-namespace AdegaAmbev.Produtos.MenuProduto 
+namespace AdegaAmbev.Produtos.Menu
 {
     public class MenuProduto
     {
         public void IniciarMenuProduto()
         {
             var produtoService = new ProdutoService();
-            var tipoBebidaService = new TipoBebidaService();
+            TipoBebidaService tipoBebidaService = new TipoBebidaService();
 
             Console.WriteLine("Digite a opção desejada:\n");
             Console.WriteLine("1 - Cadastrar tipo de bebida");
@@ -24,36 +28,36 @@ namespace AdegaAmbev.Produtos.MenuProduto
             switch (Console.ReadLine())
             {
                 case "1":
-                    System.Console.Write("Insira tipo de bebida: ");
+                    Console.Write("Insira tipo de bebida: ");
                     var nomeTipoBebida = Console.ReadLine();
-                    var tipoBebida = new TipoBebida(){Nome = nomeTipoBebida};
+                    var tipoBebida = new TipoBebida() { Nome = nomeTipoBebida };
                     tipoBebidaService.CadastrarTipoBebida(tipoBebida);
                     break;
                 case "2":
-                    System.Console.Write("Insira o nome do Produto: ");
+                    Console.Write("Insira o nome do Produto: ");
                     var nomeProduto = Console.ReadLine();
-                    
-                    System.Console.Write("\n Insira o tipo de bebida: ");
+
+                    Console.Write("\n Insira o tipo de bebida: ");
                     var nomeTipoDeBebida = Console.ReadLine();
-                    
-                    System.Console.Write("\n Insira o valor do produto: ");
+
+                    Console.Write("\n Insira o valor do produto: ");
                     var valorProduto = double.Parse(Console.ReadLine());
-                    
+
                     var novoProduto = new Produto(nomeProduto, nomeTipoDeBebida, valorProduto);
                     produtoService.CadastrarProduto(novoProduto);
                     break;
 
                 case "3":
-                    System.Console.Write("Insira o ID do Produto: ");
+                    Console.Write("Insira o ID do Produto: ");
                     var idProduto = Convert.ToInt32(Console.ReadLine());
-                    
-                    System.Console.Write("Insira o nome do Produto: ");
+
+                    Console.Write("Insira o nome do Produto: ");
                     var nomeProdutoAtualizado = Console.ReadLine();
 
-                    System.Console.Write("\n Insira o valor do produto: ");
+                    Console.Write("\n Insira o valor do produto: ");
                     var valorProdutoAtualizado = double.Parse(Console.ReadLine());
 
-                    System.Console.Write("Insira o tipo de bebida: ");
+                    Console.Write("Insira o tipo de bebida: ");
                     var nomeTipodebebidaAtualizada = Console.ReadLine();
 
                     var produto = produtoService.GetId(idProduto);
@@ -64,22 +68,22 @@ namespace AdegaAmbev.Produtos.MenuProduto
 
                 case "4":
                     var produtos = produtoService.BuscarTodosOsProdutos();
-                    System.Console.WriteLine(JsonSerializer.Serialize(produtos));
+                    Console.WriteLine(JsonSerializer.Serialize(produtos));
                     break;
 
                 case "5":
-                    System.Console.Write("Insira o nome do Produto: ");
+                    Console.Write("Insira o nome do Produto: ");
                     var nome = Console.ReadLine();
-                    System.Console.Write("\n Insira o tipo de bebida: ");
+                    Console.Write("\n Insira o tipo de bebida: ");
                     var nometipoBebida = Console.ReadLine();
                     var resultadoBusca = produtoService.BuscarProdutosPorFiltros(nome, nometipoBebida);
-                    System.Console.WriteLine(JsonSerializer.Serialize(resultadoBusca));
+                    Console.WriteLine(JsonSerializer.Serialize(resultadoBusca));
                     break;
 
                 case "0":
                     break;
                 default:
-                    System.Console.WriteLine("Opção inválida, tente novamente");
+                    Console.WriteLine("Opção inválida, tente novamente");
                     break;
             }
         }

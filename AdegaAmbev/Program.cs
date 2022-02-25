@@ -1,5 +1,4 @@
 ﻿using AdegaAmbev.Produtos.Entidades;
-using AdegaAmbev.Produtos.MenuProduto;
 using System;
 
 namespace AdegaAmbev
