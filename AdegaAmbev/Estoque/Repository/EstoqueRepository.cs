@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AdegaAmbev.Estoque.Entidades;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace AdegaAmbev.Estoque.Repository
 {
@@ -14,7 +16,7 @@ namespace AdegaAmbev.Estoque.Repository
             Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\Estoque.json";
         }
 
-        public void Create(Entidades.Estoque estoque) 
+        public async Task Create(Entidades.Estoque estoque)
         {
             var banco = File.ReadAllText(Host);
             if (banco == "")
@@ -34,7 +36,53 @@ namespace AdegaAmbev.Estoque.Repository
                 bancoSerializado.Add(estoque);
             }
 
-            File.WriteAllText(Host, JsonSerializer.Serialize(bancoSerializado));
+            await File.WriteAllTextAsync(Host, JsonSerializer.Serialize(bancoSerializado));
+        }
+
+        public async Task<List<Entidades.Estoque>> ObterTodos()
+        {
+            var banco = File.ReadAllText(Host);
+
+            if (banco == "")
+            {
+                return new List<Entidades.Estoque>();
+            }
+
+            var bancoSerializado = JsonSerializer.Deserialize<List<Entidades.Estoque>>(banco);
+            return bancoSerializado;
+        }
+
+        public Entidades.Estoque ObterPorCodigo(int codigoEstoque)
+        {
+            var banco = File.ReadAllText(Host);
+
+            if (banco == "")
+            {
+                return null;
+            }
+
+            var bancoSerializado = JsonSerializer.Deserialize<List<Entidades.Estoque>>(banco);
+            return bancoSerializado.SingleOrDefault(x => x.ProdutoId == codigoEstoque);
+        }
+
+        public async Task DescontarEstoque(List<VendaItem> itens)
+        {
+            var banco = File.ReadAllText(Host);
+
+            if (banco == "")
+            {
+                return;
+            }
+
+            var bancoSerializado = JsonSerializer.Deserialize<List<Entidades.Estoque>>(banco);
+
+            foreach(var vendaItem in itens)
+            {
+                var estoque = bancoSerializado.SingleOrDefault(x => x.ProdutoId == vendaItem.ProdutoId);
+                estoque.SubtrairQuantidade(vendaItem.Quantidade);
+            }
+
+            await File.WriteAllTextAsync(Host, JsonSerializer.Serialize(bancoSerializado));
         }
     }
 }

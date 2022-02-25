@@ -8,13 +8,12 @@ namespace AdegaAmbev.Estoque.Menu
     {
         public static void Iniciar()
         {
+            Console.Title = "Módulo Time D";
             Console.Clear();
             Console.WriteLine("Seja bem vindo ao módulo do time D\n");
 
             Console.WriteLine("Digite a opção que você deseja\n");
-
             Console.WriteLine("1 - Módulo Estoque");
-            //Console.WriteLine("2 - Inserir Tipo Venda");
             Console.WriteLine("2 - Módulo Venda");
             Console.WriteLine("0 - Sair\n");
             Console.Write("Opção: ");
@@ -23,11 +22,11 @@ namespace AdegaAmbev.Estoque.Menu
             switch (Console.ReadLine())
             {
                 case "1":
-                    EstoqueService.InserirEstoque();
+                    EstoqueService.MenuEstoque();
                     break;
 
                 case "2":
-                    VendaService.RealizarVenda();
+                    VendaService.MenuVenda();
                     break;
 
                 case "0":

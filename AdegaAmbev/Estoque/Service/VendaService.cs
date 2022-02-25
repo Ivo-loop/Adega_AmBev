@@ -1,17 +1,40 @@
 ﻿using AdegaAmbev.Comum.Enums;
 using AdegaAmbev.Estoque.Entidades;
+using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AdegaAmbev.Estoque.Service
 {
     public static class VendaService
     {
+        private static readonly EstoqueRepository _estoqueRepository = new();
 
-        public static void RealizarVenda()
+        public static void MenuVenda()
+        {
+            Console.Clear();
+            Console.WriteLine("1 - Realizar Venda");
+            Console.WriteLine("0 - Voltar\n");
+            Console.Write("Opção: ");
+
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    RealizarVenda().Wait();
+                    break;
+
+                case "0":
+                    GrupoDMenu.Iniciar();
+                    break;
+            }
+
+            MenuVenda();
+        }
+
+        public static async Task RealizarVenda()
         {
             Console.Clear();
 
@@ -33,7 +56,9 @@ namespace AdegaAmbev.Estoque.Service
 
             //var valorTotal = CalcularValorTotal(vendaItens, produtos);
             var valorTotal = 100.32;
+
             var venda = new Venda(codigoCliente, valorTotal, vendaItens, tipoVenda);
+            await _estoqueRepository.DescontarEstoque(vendaItens);
 
             vendaRepository.Create(venda);
         }
@@ -41,9 +66,9 @@ namespace AdegaAmbev.Estoque.Service
         private static void AdicionarItens(List<VendaItem> itens, List<Produto.Entidades.Produto> produtos)
         {
 
-            var adicionarNovoProduto = "S";
+            string adicionarNovoProduto;
 
-            while(adicionarNovoProduto.ToUpper() == "S")
+            do
             {
                 Console.Write("Digite o código do produto: ");
                 var codigoProduto = Convert.ToInt32(Console.ReadLine());
@@ -61,10 +86,10 @@ namespace AdegaAmbev.Estoque.Service
                 var vendaItem = new VendaItem(codigoProduto, quantidadeProduto);
                 itens.Add(vendaItem);
 
-                Console.WriteLine("Deseja inserir mais um item na venda? s/n");
+                Console.Write("Deseja inserir mais um item na venda? (s/n): ");
                 adicionarNovoProduto = Console.ReadLine();
             }
-            
+            while (adicionarNovoProduto.ToUpper() == "S");
         }
 
         //private static double CalcularValorTotal(List<VendaItem> vendaItens, List<Produto.Entidades.Produto> produtos)

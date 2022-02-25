@@ -1,0 +1,1 @@
+[{"ClienteId":10,"ValorTotal":100.32,"Itens":[{"ProdutoId":1,"Quantidade":5},{"ProdutoId":2,"Quantidade":10}],"TipoVenda":1,"Id":0},{"ClienteId":1,"ValorTotal":100.32,"Itens":[{"ProdutoId":1,"Quantidade":5},{"ProdutoId":2,"Quantidade":10}],"TipoVenda":1,"Id":1}]

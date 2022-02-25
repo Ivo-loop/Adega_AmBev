@@ -19,5 +19,10 @@
         {
             Quantidade = quantidade;
         }
+
+        public void SubtrairQuantidade(int quantidade)
+        {
+            Quantidade -= quantidade;
+        }
     }
 }
