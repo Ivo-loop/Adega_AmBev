@@ -13,9 +13,9 @@ namespace AdegaAmbev.Estoque.Menu
 
             Console.WriteLine("Digite a opção que você deseja\n");
 
-            Console.WriteLine("1 - Inserir Estoque");
+            Console.WriteLine("1 - Módulo Estoque");
             //Console.WriteLine("2 - Inserir Tipo Venda");
-            Console.WriteLine("2 - Realizar uma Venda");
+            Console.WriteLine("2 - Módulo Venda");
             Console.WriteLine("0 - Sair\n");
             Console.Write("Opção: ");
 

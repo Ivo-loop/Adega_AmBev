@@ -1,6 +1,7 @@
 ﻿using AdegaAmbev.Estoque.Entidades;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace AdegaAmbev.Estoque.Repository
@@ -25,6 +26,8 @@ namespace AdegaAmbev.Estoque.Repository
             }
             
             var bancoSerializado = JsonSerializer.Deserialize<List<Venda>>(banco);
+            var maiorId = bancoSerializado.Max(x => x.Id);
+            venda.SetId(maiorId + 1);
             bancoSerializado.Add(venda);
             File.WriteAllText(Host, JsonSerializer.Serialize(bancoSerializado));
 
