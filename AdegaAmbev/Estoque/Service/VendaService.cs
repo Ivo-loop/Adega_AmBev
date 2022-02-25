@@ -1,9 +1,11 @@
-﻿using AdegaAmbev.Comum.Enums;
+﻿using AdegaAmbev.Comum;
+using AdegaAmbev.Comum.Enums;
 using AdegaAmbev.Estoque.Entidades;
 using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AdegaAmbev.Estoque.Service
@@ -11,11 +13,14 @@ namespace AdegaAmbev.Estoque.Service
     public static class VendaService
     {
         private static readonly EstoqueRepository _estoqueRepository = new();
+        private static readonly VendaRepository _vendaRepository = new();
 
         public static void MenuVenda()
         {
             Console.Clear();
             Console.WriteLine("1 - Realizar Venda");
+            Console.WriteLine("2 - Mostrar Todas as Vendas");
+            Console.WriteLine("2 - Mostrar Vendas Por Cliente");
             Console.WriteLine("0 - Voltar\n");
             Console.Write("Opção: ");
 
@@ -24,6 +29,10 @@ namespace AdegaAmbev.Estoque.Service
             {
                 case "1":
                     RealizarVenda().Wait();
+                    break;
+
+                case "2":
+                    MostrarTodasAsVendas().Wait();
                     break;
 
                 case "0":
@@ -46,8 +55,9 @@ namespace AdegaAmbev.Estoque.Service
             var codigoCliente = Convert.ToInt32(Console.ReadLine());
             //Verificar se o cliente existe no futuro.
             
-            Console.Write("Digite o tipo da venda do cliente: ");
-            // Fazer menu para tipo venda.
+            Console.WriteLine("Digite o tipo da venda do cliente");
+            MostrarCodigosVendas();
+            Console.WriteLine("");
             var tipoVenda = (TipoVenda)Convert.ToInt32(Console.ReadLine());
 
             var produtos = new List<Produto.Entidades.Produto>();
@@ -61,6 +71,21 @@ namespace AdegaAmbev.Estoque.Service
             await _estoqueRepository.DescontarEstoque(vendaItens);
 
             vendaRepository.Create(venda);
+        }
+
+        public static async Task MostrarTodasAsVendas()
+        {
+            Console.Clear();
+            var todasVendasSalvas = _vendaRepository.ObterTodos();
+
+            foreach (var venda in todasVendasSalvas)
+            {
+                Console.WriteLine($"{venda}");
+                Console.WriteLine($"=====================================================\n");
+            }
+
+            Console.Write("\nAperte qualquer tecla para continuar...");
+            Console.ReadLine();
         }
 
         private static void AdicionarItens(List<VendaItem> itens, List<Produto.Entidades.Produto> produtos)
@@ -80,8 +105,14 @@ namespace AdegaAmbev.Estoque.Service
                 //Mostrar na tela o preço do produto.
 
                 Console.Write("Digite a quantidade que deseja: ");
+                var estoqueSalvo = _estoqueRepository.ObterPorCodigo(codigoProduto);
+
                 var quantidadeProduto = Convert.ToInt32(Console.ReadLine());
-                //validar se quantidade é válida
+                if (!EhQuantidadeValida(quantidadeProduto, estoqueSalvo))
+                {
+                    adicionarNovoProduto = "S";
+                    continue;
+                }
 
                 var vendaItem = new VendaItem(codigoProduto, quantidadeProduto);
                 itens.Add(vendaItem);
@@ -104,5 +135,37 @@ namespace AdegaAmbev.Estoque.Service
 
         //    return valorTotal;
         //}
+
+        private static bool EhQuantidadeValida(int quantidade, Entidades.Estoque estoqueSavlo)
+        {
+            if (quantidade <= 0)
+            {
+                Console.WriteLine($"\nA quantidade informada é inválida. Código precisa ser positivo");
+                Console.WriteLine($"Não será realizada alteração no estoque.");
+                Thread.Sleep(5000);
+                return false;
+            }
+            if(quantidade > estoqueSavlo.Quantidade)
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine($"\n Quantidade solicitada não disponível no estoque. Quantidade Disponível: {estoqueSavlo.Quantidade}\n");
+                Console.ResetColor();
+                Thread.Sleep(5000);
+                return false;
+            }
+            return true;
+        }
+
+        private static void MostrarCodigosVendas()
+        {
+            var contador = 1;
+            foreach (var @enum in Enum.GetValues(typeof(TipoVenda)))
+            {
+                Console.WriteLine($" {contador} - {@enum}");
+                contador++;
+            }
+        }
+
+
     }
 }

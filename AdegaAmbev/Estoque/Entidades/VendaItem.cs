@@ -13,6 +13,11 @@
             Quantidade = quantidade;
         }
 
+        public override string ToString()
+        {
+            return @$"Produto Id = {ProdutoId}  Quantidade = {Quantidade}";
+        }
+
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
     }

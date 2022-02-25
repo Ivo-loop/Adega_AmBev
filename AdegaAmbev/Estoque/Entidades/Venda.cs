@@ -18,9 +18,25 @@ namespace AdegaAmbev.Estoque.Entidades
             TipoVenda = tipoVenda;
         }
 
+        public override string ToString()
+        {
+            string itensString = "";
+
+            Itens.ForEach(x => itensString += $"{x} // ");
+
+            return @$"
+    Cliente Id = {ClienteId}
+    Valor Total = {ValorTotal}
+    Tipo Venda = {TipoVenda}
+    Itens:
+        {itensString}";
+        }
+
         public int ClienteId { get; set; }
         public double ValorTotal { get; set; }
         public List<VendaItem> Itens { get; set; }
         public TipoVenda TipoVenda { get; set; }
+
+
     }
 }

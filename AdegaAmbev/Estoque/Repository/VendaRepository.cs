@@ -30,7 +30,19 @@ namespace AdegaAmbev.Estoque.Repository
             venda.SetId(maiorId + 1);
             bancoSerializado.Add(venda);
             File.WriteAllText(Host, JsonSerializer.Serialize(bancoSerializado));
+        }
 
+        public List<Venda> ObterTodos()
+        {
+            var banco = File.ReadAllText(Host);
+
+            if (banco == "")
+            {
+                return new List<Venda>();
+            }
+
+            var bancoSerializado = JsonSerializer.Deserialize<List<Venda>>(banco);
+            return bancoSerializado;
         }
     }
 }

@@ -73,7 +73,7 @@ namespace AdegaAmbev.Estoque.Service
         public static async Task VizualizarEstoque()
         {
             Console.Clear();
-            var todosEstoquesSalvos = await _estoqueRepository.ObterTodos();
+            var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
 
             foreach(var estoque in todosEstoquesSalvos)
             {
@@ -111,7 +111,7 @@ namespace AdegaAmbev.Estoque.Service
 
         private static bool EhQuantidadeValida(int codigo)
         {
-            if (codigo <= 0 || codigo == -0)
+            if (codigo <= 0)
             {
                 Console.WriteLine($"\nA quantidade informada é inválida. Código precisa ser positivo");
                 Console.WriteLine($"Não será realizada alteração no estoque.");
