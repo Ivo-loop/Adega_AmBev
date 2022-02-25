@@ -4,10 +4,10 @@ namespace AdegaAmbev.Produtos.Entidades {
     public class Produto : EntidadeBase
     {
         public string Nome {get; set;}
-        public TipoBebida TipoBebida {get; set;}
+        public string TipoBebida {get; set;}
         public double Valor {get; set;}
     
-    public Produto(string nome, TipoBebida tipoBebida, double valor)
+    public Produto(string nome, string tipoBebida, double valor)
     {
         Nome = nome;
         TipoBebida = tipoBebida;

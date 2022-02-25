@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdegaAmbev.Produtos.Entidades;
+using AdegaAmbev.Produtos.Repositorio;
+using System;
 
 namespace AdegaAmbev
 {
@@ -6,7 +8,16 @@ namespace AdegaAmbev
     {
         static void Main(string[] args)
         {
-            StartupSnake();
+            RepositorioProduto repositorio = new RepositorioProduto();
+
+            repositorio.CadastrarProduto(new Produto("brahma", "alcolico", 14.9));
+            var produtos = repositorio.BuscarTodosOsProdutos();
+            foreach(var poduto in produtos)
+            {
+                Console.WriteLine(poduto);
+            }
+
+
         }
 
         public static void StartupSnake()
