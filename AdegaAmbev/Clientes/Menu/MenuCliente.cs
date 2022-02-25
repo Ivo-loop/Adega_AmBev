@@ -6,7 +6,7 @@ namespace AdegaAmbev.Clientes.Menu
 {
     public class MenuCliente
     {
-        public async static void Menu() 
+        public static void Menu() 
         {
             var service = new ClienteService();
 
@@ -28,7 +28,7 @@ namespace AdegaAmbev.Clientes.Menu
                     cliente.Email = Console.ReadLine();
                     Console.WriteLine("Insira o nome do cliente: ");
                     cliente.Nome = Console.ReadLine();
-                    await service.CadastrarCliente(cliente);
+                    service.CadastrarCliente(cliente);
                     break;
                 case '2':
                     Console.ReadLine();
