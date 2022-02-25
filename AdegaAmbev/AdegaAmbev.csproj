@@ -9,12 +9,9 @@
     <Folder Include="Cliente\Entidades\" />
     <Folder Include="Cliente\Console\" />
     <Folder Include="Cliente\Service\" />
-    <Folder Include="Estoque\Console\" />
-    <Folder Include="Estoque\Entidades\" />
-    <Folder Include="Estoque\Service\" />
     <Folder Include="Produto\Console\" />
     <Folder Include="Produto\Entidades\" />
     <Folder Include="Produto\Service\" />
   </ItemGroup>
-
+    
 </Project>
