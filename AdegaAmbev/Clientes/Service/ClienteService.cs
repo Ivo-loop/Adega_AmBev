@@ -39,5 +39,13 @@ namespace AdegaAmbev.Clientes.Service
                 await File.AppendAllLinesAsync(fileName, linhas);
             }
         }
+
+        public Cliente FiltrarClientePorNome(Cliente[] clientes, string nome) {
+            return (Cliente)clientes.Where(cliente => cliente.Nome == nome);
+        }
+        
+        public Cliente FiltrarClientePorEmail(Cliente[] clientes, string email) {
+            return (Cliente)clientes.Where(cliente => cliente.Email == email);
+        }
     }
 }
