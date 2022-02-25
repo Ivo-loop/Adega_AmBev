@@ -1,8 +1,8 @@
+using AdegaAmbev.Clientes.Menu;
 using AdegaAmbev.Produtos.Entidades;
-using AdegaAmbev.Produtos.Entidades;
-using AdegaAmbev.Produtos.Repositorio;
 using System;
 using AdegaAmbev.Estoque.Menu;
+
 
 namespace AdegaAmbev
 {
@@ -11,12 +11,13 @@ namespace AdegaAmbev
 
         static void Main(string[] args)
         {
-            StartupSnake();
+            IniciarMenuGrupoB();
             IniciarMenuGrupoD();
         }
 
-        public static void StartupSnake()
+        public static void IniciarMenuGrupoB()
         {
+            MenuCliente.Menu();
         }
 
         public static void IniciarMenuGrupoD()

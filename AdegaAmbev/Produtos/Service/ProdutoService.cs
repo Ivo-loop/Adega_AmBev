@@ -26,7 +26,8 @@ namespace AdegaAmbev.Produtos.Service
 
             var produtosDB = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
             stream.Close();
-            produto.Id = produtosDB.Count + 1;
+            var qtdProdutos = produtosDB.Count;
+            produto.SetId(++qtdProdutos);
             produtosDB.Add(produto);
             stream.Close();
 
@@ -44,7 +45,7 @@ namespace AdegaAmbev.Produtos.Service
             stream.Close();
             var produtoDB = produtosDb.First(x => x.Id == id);
             var index = produtosDb.FindIndex(x => x.Id == id);
-            produto.Id = id;
+            produto.SetId(id);
             produtosDb[index] = produto;
 
             File.WriteAllText(Host, JsonSerializer.Serialize(produtosDb));
