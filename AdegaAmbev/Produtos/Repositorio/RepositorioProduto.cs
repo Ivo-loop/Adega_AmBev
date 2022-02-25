@@ -44,12 +44,20 @@ namespace AdegaAmbev.Produtos.Repositorio {
             return JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
         }
 
-        public List<Produto> BuscarProdutosPorFiltros(string nome, string tipoBebida){
+        public Produto GetId(int id)
+        {
+            using FileStream stream = File.OpenRead(Host);
+            var produtosDb = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
+            stream.Close();
+            return produtosDb.First(x => x.Id == id);
+        }
+
+        public List<Produto> BuscarProdutosPorFiltros(string nome ="", string tipoBebida=""){
             using FileStream stream = File.OpenRead(Host);
             var produtosDB = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
             stream.Close();
 
-            if (!String.IsNullOrWhiteSpace(nome) && tipoBebida != null)
+            if(!String.IsNullOrWhiteSpace(nome) && !String.IsNullOrWhiteSpace(tipoBebida))
             {
                 return produtosDB.Where(x=> x.Nome == nome && x.TipoBebida == tipoBebida).ToList();
             }
