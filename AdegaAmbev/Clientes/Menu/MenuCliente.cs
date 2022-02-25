@@ -44,20 +44,31 @@ namespace AdegaAmbev.Clientes.Menu
                         case '1':
                             Console.ReadLine();
                             Console.WriteLine("Insira o nome do cliente: ");
-                            service.FiltrarClientePorNome(Console.ReadLine());
+                            var clienteFiltroNome = service.FiltrarClientePorNome(Console.ReadLine());
+                            Console.WriteLine("Nome do cliente: {0}", clienteFiltroNome.Nome);
+                            Console.WriteLine("E-mail do cliente: {0}", clienteFiltroNome.Email);
                             break;
                         case '2':
                             Console.ReadLine();
                             Console.WriteLine("Insira o e-mail do cliente: ");
-                            //service.FiltrarClientePorEmail(Console.ReadLine());
+                            var clienteFiltroEmail = service.FiltrarClientePorEmail(Console.ReadLine());
+                            Console.WriteLine("Nome do cliente: {0}", clienteFiltroEmail.Nome);
+                            Console.WriteLine("E-mail do cliente: {0}", clienteFiltroEmail.Email);
                             break;
                         default:
                             Console.WriteLine("Opção inválida, tente novamente...");
-                            //todo: chamar o case 3 de novo
                             break;
                     }
                     break;
                 case '4':
+                    Console.ReadLine();
+                    var clientes = service.ObterTodosClientes();
+                    foreach (var clienteObter in clientes)
+                    {
+                        Console.WriteLine("Id do cliente: {0}", clienteObter.Id);
+                        Console.WriteLine("Nome do cliente: {0}", clienteObter.Nome);
+                        Console.WriteLine("E-mail do cliente: {0}", clienteObter.Email);
+                    }
                     break;
                 case '0':
                     Environment.Exit(0);

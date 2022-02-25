@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace AdegaAmbev.Clientes.Service
 {
@@ -25,35 +26,56 @@ namespace AdegaAmbev.Clientes.Service
 
         public async Task CadastrarCliente(Cliente cliente){
             string fileName = "Banco/Cliente.json";
-            var validação = ValidarCliente(cliente);
 
-            if (validação != "sucesso")
-                return;
-            
-            if (File.ReadAllLines(fileName).Any(linha => linha.Contains(cliente.Email))){
+            var clientes = ObterTodosClientes();
+
+            if (clientes.Any())
+            {
+                var validacao = ValidarCliente(cliente);
+                if (validacao != "sucesso")
+                    return;
+            }
+
+            if (clientes.Any(x => x.Email == cliente.Email)){
                 Console.WriteLine("Cliente já cadastrado");
             }
             else{
                 var quantidadeLinhas = File.ReadLines(fileName).Count();
                 cliente.Id = ++quantidadeLinhas;
-                string[] linhas = {JsonSerializer.Serialize(cliente)};
-                await File.AppendAllLinesAsync(fileName, linhas);
+                clientes.Add(cliente);
+                string[] json = {JsonSerializer.Serialize(clientes)};
+                await File.WriteAllLinesAsync(fileName, json);
                 Console.WriteLine("Cliente cadastrado com sucesso");
             }
         }
 
+        public List<Cliente> ObterTodosClientes(){
+            using (StreamReader r = new StreamReader("Banco/Cliente.json"))
+            {
+                List<Cliente> clientes = new List<Cliente>();
+
+                string json = r.ReadToEnd();
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    return clientes;
+                }
+
+                clientes = JsonSerializer.Deserialize<List<Cliente>>(json);
+                return clientes;
+            }
+        }
+
         public Cliente FiltrarClientePorNome(string nome) {
-            string fileName = "Banco/Cliente.json";
-            var clientes = File.ReadAllLines(fileName);
-            var cliente = clientes.Select(linha => linha.Contains(nome));
-            //return (Cliente)clientes.Where(cliente => cliente.Nome == nome);
-            Console.WriteLine();
-            return new Cliente();
+            var clientes = ObterTodosClientes();
+            var cliente = clientes.Where(x => x.Nome == nome);
+            return cliente.FirstOrDefault();
         }
         
-        //public Cliente FiltrarClientePorEmail(Cliente[] clientes, string email) {
-        //    return (Cliente)clientes.Where(cliente => cliente.Email == email);
-        //}
+        public Cliente FiltrarClientePorEmail(string email) {
+            var clientes = ObterTodosClientes();
+            var cliente = clientes.Where(x => x.Email == email);
+            return cliente.FirstOrDefault();
+        }
 
         public void AtualizarCliente()
         {
