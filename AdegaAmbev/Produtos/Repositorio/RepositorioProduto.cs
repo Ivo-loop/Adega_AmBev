@@ -19,8 +19,10 @@ namespace AdegaAmbev.Produtos.Repositorio {
         public void CadastrarProduto(Produto produto){
             using FileStream stream = File.OpenRead(Host);
             var produtosDB = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
+            stream.Close();
             produto.Id = produtosDB.Count+1;
             produtosDB.Add(produto);
+            stream.Close();
 
             File.WriteAllText(Host, JsonSerializer.Serialize(produtosDB));
         }
@@ -28,6 +30,7 @@ namespace AdegaAmbev.Produtos.Repositorio {
         public void AtualizarProduto(int id, Produto produto){
             using FileStream stream = File.OpenRead(Host);
             var produtosDb = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
+            stream.Close();
             var produtoDB = produtosDb.First(x => x.Id == id);
             var index = produtosDb.FindIndex(x => x.Id == id);
 
@@ -44,8 +47,9 @@ namespace AdegaAmbev.Produtos.Repositorio {
         public List<Produto> BuscarProdutosPorFiltros(string nome, string tipoBebida){
             using FileStream stream = File.OpenRead(Host);
             var produtosDB = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
+            stream.Close();
 
-            if(!String.IsNullOrWhiteSpace(nome) && tipoBebida != null)
+            if (!String.IsNullOrWhiteSpace(nome) && tipoBebida != null)
             {
                 return produtosDB.Where(x=> x.Nome == nome && x.TipoBebida == tipoBebida).ToList();
             }

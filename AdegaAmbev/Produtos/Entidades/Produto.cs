@@ -7,7 +7,6 @@ namespace AdegaAmbev.Produtos.Entidades {
         public string TipoBebida {get; set;}
         public double Valor {get; set;}
 
-        public Produto produtoAnterior { get; set;}
     
     public Produto(string nome, string tipoBebida, double valor)
     {
