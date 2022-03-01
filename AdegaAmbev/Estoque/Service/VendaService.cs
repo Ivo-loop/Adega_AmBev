@@ -20,7 +20,6 @@ namespace AdegaAmbev.Estoque.Service
             Console.Clear();
             Console.WriteLine("1 - Realizar Venda");
             Console.WriteLine("2 - Mostrar Todas as Vendas");
-            //Console.WriteLine("2 - Mostrar Vendas Por Cliente");
             Console.WriteLine("0 - Voltar\n");
             Console.Write("Opção: ");
 
@@ -36,8 +35,7 @@ namespace AdegaAmbev.Estoque.Service
                     break;
 
                 case "0":
-                    GrupoDMenu.Iniciar();
-                    break;
+                    return;
             }
 
             MenuVenda();

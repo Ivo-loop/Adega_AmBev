@@ -10,8 +10,7 @@ namespace AdegaAmbev.Clientes.Menu
         {
             var service = new ClienteService();
 
-            Console.WriteLine("MENU DE CLIENTES");
-            Console.WriteLine("");
+            Console.WriteLine("MENU DE CLIENTES\n");
             Console.WriteLine("Escolha uma das opções...");
             Console.WriteLine("1. Cadastrar Cliente");
             Console.WriteLine("2. Atualizar Cliente");
@@ -71,13 +70,13 @@ namespace AdegaAmbev.Clientes.Menu
                     }
                     break;
                 case '0':
-                    Environment.Exit(0);
-                    break;
+                    return;
                 default:
                     Console.WriteLine("Opção inválida, tente novamente...");
-                    Menu();
+                    Console.ReadLine();
                     break;
             }
+            Menu();
         }
     }
 }

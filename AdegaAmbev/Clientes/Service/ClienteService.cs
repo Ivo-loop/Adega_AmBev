@@ -9,6 +9,12 @@ namespace AdegaAmbev.Clientes.Service
 {
     public class ClienteService
     {
+        private string pathFile { get; set; }
+        public ClienteService()
+        {
+            pathFile = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\Cliente.json";
+        }
+
         public string ValidarCliente(Cliente cliente)
         {
             if (string.IsNullOrEmpty(cliente.Nome))
@@ -25,8 +31,6 @@ namespace AdegaAmbev.Clientes.Service
 
         public void CadastrarCliente(Cliente cliente)
         {
-            string fileName = "Banco/Cliente.json";
-
             var clientes = ObterTodosClientes();
 
             if (clientes.Any())
@@ -46,14 +50,14 @@ namespace AdegaAmbev.Clientes.Service
                 cliente.SetId(++qtdClientes);
                 clientes.Add(cliente);
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(clientes, Newtonsoft.Json.Formatting.Indented);
-                File.WriteAllText(fileName, json);
+                File.WriteAllText(pathFile, json);
                 Console.WriteLine("Cliente cadastrado com sucesso");
             }
         }
 
         public List<Cliente> ObterTodosClientes()
         {
-            using (StreamReader r = new StreamReader("Banco/Cliente.json"))
+            using (StreamReader r = new StreamReader(pathFile))
             {
                 List<Cliente> clientes = new List<Cliente>();
 
@@ -108,9 +112,8 @@ namespace AdegaAmbev.Clientes.Service
             }
 
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(clientes, Newtonsoft.Json.Formatting.Indented);
-            File.WriteAllText("Banco/Cliente.json", json);
+            File.WriteAllText(pathFile, json);
             Console.WriteLine("Registro atualizado com sucesso");
         }
-
     }
 }

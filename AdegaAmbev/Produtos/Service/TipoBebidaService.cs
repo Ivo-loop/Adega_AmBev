@@ -12,13 +12,14 @@ namespace AdegaAmbev.Produtos.Service {
 
         public TipoBebidaService()
         {
-            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\Produto.json";
+            Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\TipoBebida.json";
         }
 
         public void CadastrarTipoBebida(TipoBebida tipoBebida){
             using FileStream stream = File.OpenRead(Host);
             var tipoBebidaDb = JsonSerializer.DeserializeAsync<List<TipoBebida>>(stream).Result;
             stream.Close();
+
             var qtdTipoBebida = tipoBebidaDb.Count;
             tipoBebida.SetId(++qtdTipoBebida);
             tipoBebidaDb.Add(tipoBebida);

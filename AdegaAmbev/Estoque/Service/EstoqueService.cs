@@ -1,6 +1,7 @@
 ﻿using AdegaAmbev.Comum;
 using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
+using AdegaAmbev.Produtos.Service;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace AdegaAmbev.Estoque.Service
 
         public static void MenuEstoque()
         {
+            ProdutoService produtoService = new ProdutoService();
+
             Console.Clear();
             Console.WriteLine("1 - Inserir Estoque");
             Console.WriteLine("2 - Vizualizar Estoque");
@@ -20,35 +23,31 @@ namespace AdegaAmbev.Estoque.Service
             Console.WriteLine("0 - Voltar\n");
             Console.Write("Opção: ");
 
-
             switch (Console.ReadLine())
             {
                 case "1":
-                    InserirEstoque().Wait();
+                    InserirEstoque(produtoService).Wait();
                     break;
 
                 case "2":
                     CorConsole.Branco();
-                    VizualizarEstoque().Wait();
+                    VizualizarEstoque(produtoService).Wait();
                     Console.ResetColor();
                     break;
 
                 case "3":
                     Console.Write("Digite o código do produto: ");
                     var codigoProduto = Convert.ToInt32(Console.ReadLine());
-                    VizualizarEstoquePorProduto(codigoProduto).Wait();
+                    VizualizarEstoquePorProduto(produtoService, codigoProduto).Wait();
                     Console.ResetColor();
                     break;
-
                 case "0":
-                    GrupoDMenu.Iniciar();
-                    break;
+                    return;
             }
-
             MenuEstoque();
         }
 
-        public static async Task InserirEstoque()
+        public static async Task InserirEstoque(ProdutoService produtos)
         {
             Console.Clear();
 
@@ -56,7 +55,12 @@ namespace AdegaAmbev.Estoque.Service
             
             Console.Write("Digite o código do produto: ");
             var codigoProduto = Convert.ToInt32(Console.ReadLine());
-            //Verificar se o produto existe no futuro.
+
+            if (!produtos.ExisteProduto(codigoProduto))
+            {
+                Console.WriteLine("Produto não existe");
+                return;
+            }
 
             Console.Write("Digite a quantidade: ");
             var quantidade = Convert.ToInt32(Console.ReadLine());
@@ -67,25 +71,26 @@ namespace AdegaAmbev.Estoque.Service
 
             var estoque = new Entidades.Estoque(codigoProduto, quantidade);
             await _estoqueRepository.Create(estoque);
-
         }
 
-        public static async Task VizualizarEstoque()
+        public static async Task VizualizarEstoque(ProdutoService produtos)
         {
             Console.Clear();
             var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
 
             foreach(var estoque in todosEstoquesSalvos)
-            {
-                Console.Write($"Produto Id = {estoque.ProdutoId}");
-                Console.Write($" Quantidade = {estoque.Quantidade}\n");
+            { 
+                var produto = produtos.GetId(estoque.ProdutoId);
+                Console.Write($"Produto Id = {estoque.ProdutoId} ");
+                Console.Write($"Nome Produto = {produto.Nome} ");
+                Console.Write($"Quantidade = {estoque.Quantidade}\n");
             }
 
             Console.Write("\nAperte qualquer tecla para continuar...");
             Console.ReadLine();
         }
 
-        public static async Task VizualizarEstoquePorProduto(int codigoProduto)
+        public static async Task VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto)
         {
             Console.Clear();
 
@@ -102,8 +107,10 @@ namespace AdegaAmbev.Estoque.Service
 
             CorConsole.Branco();
 
+            var produto = produtos.GetId(estoque.ProdutoId);
             Console.Write($"Produto Id = {estoque.ProdutoId}");
-            Console.Write($" Quantidade = {estoque.Quantidade}\n");
+            Console.Write($" Nome Produto = {produto.Nome} ");
+            Console.Write($"Quantidade = {estoque.Quantidade}\n");
 
             Console.Write("\nAperte qualquer tecla para continuar...");
             Console.ReadLine();

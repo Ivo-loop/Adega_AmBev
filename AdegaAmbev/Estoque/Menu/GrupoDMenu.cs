@@ -30,18 +30,15 @@ namespace AdegaAmbev.Estoque.Menu
                     break;
 
                 case "0":
-                    Environment.Exit(0);
-                    break;
+                    return;
 
                 default:
+                    Console.Clear();
                     Console.WriteLine("Opção invalida, tente novamente...\n");
                     Thread.Sleep(2000);
-                    Console.Clear();
+                    Iniciar();
                     break;
             }
-
-            Iniciar(); // Depois é preicso alterar esse cara para integrar com os menus de outras equipes.
-
         }
     }
 }
