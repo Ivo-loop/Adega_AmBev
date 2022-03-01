@@ -62,16 +62,17 @@ namespace AdegaAmbev.Produtos.Menu
                     break;
 
                 case '3':
+                    Console.ReadLine();
                     Console.WriteLine("Insira o ID do Produto: ");
                     var idProduto = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("Insira o nome do Produto: ");
+                    Console.WriteLine("Insira o novo nome do Produto: ");
                     var nomeProdutoAtualizado = Console.ReadLine();
 
-                    Console.WriteLine("Insira o valor do produto: ");
+                    Console.WriteLine("Insira o novo valor do produto: ");
                     var valorProdutoAtualizado = double.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Insira o tipo de bebida: ");
+                    Console.WriteLine("Insira o novo tipo de bebida: ");
                     var nomeTipodebebidaAtualizada = Console.ReadLine();
 
                     var produtoAtualizado = new Produto(nomeProdutoAtualizado, nomeTipodebebidaAtualizada, valorProdutoAtualizado);

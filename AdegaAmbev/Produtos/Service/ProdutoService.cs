@@ -43,7 +43,9 @@ namespace AdegaAmbev.Produtos.Service
         public bool AtualizarProduto(int id, Produto produto)
         {
             if (!bebidaService.ExisteTipoBebida(produto.TipoBebida)) {
+                CorLetraConsole.Vermelho();
                 System.Console.WriteLine("Se é engraçadinho né? Agora vai colocar um tipo bebida que existe na base");
+                CorLetraConsole.Preto();
                 return false; 
             }
 
