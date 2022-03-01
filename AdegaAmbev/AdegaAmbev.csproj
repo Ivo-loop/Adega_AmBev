@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Produto\**" />
-    <EmbeddedResource Remove="Produto\**" />
-    <None Remove="Produto\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Cliente\Entidades\" />
     <Folder Include="Cliente\Console\" />
     <Folder Include="Cliente\Service\" />

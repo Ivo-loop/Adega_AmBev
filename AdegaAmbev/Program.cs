@@ -8,7 +8,6 @@ namespace AdegaAmbev
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
             StartMenu();
@@ -55,16 +54,6 @@ namespace AdegaAmbev
                         break;
                 }
             }
-        }
-
-        public static void IniciarMenuGrupoB()
-        {
-            MenuCliente.Menu();
-        }
-
-        public static void IniciarMenuGrupoD()
-        {
-            GrupoDMenu.Iniciar();
         }
     }
 }
