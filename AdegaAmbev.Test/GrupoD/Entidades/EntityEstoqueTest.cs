@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace AdegaAmbev.Test.GrupoD
+namespace AdegaAmbev.Test.GrupoD.Entidades
 {
     public class EntityEstoqueTest
     {
