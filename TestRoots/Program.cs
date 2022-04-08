@@ -1,6 +1,5 @@
 ﻿using AdegaAmbev.Clientes.Entidades;
 using AdegaAmbev.Clientes.Service;
-using AdegaAmbev.Comum;
 using System;
 
 namespace ClienteTestRoots
@@ -23,17 +22,11 @@ namespace ClienteTestRoots
 
             var valor = clienteService.ValidarCliente(cliente);
 
-            if (valor != "sucesso") { 
-                CorLetraConsole.Vermelho();
+            if (valor != "sucesso")
                 Console.WriteLine("test de validar user falhando");
-            }
             else
-            {
-                CorLetraConsole.Verde();
                 Console.WriteLine("deu sucesso");
-                Console.ResetColor();
-            }
-
         }
+
     }
 }
