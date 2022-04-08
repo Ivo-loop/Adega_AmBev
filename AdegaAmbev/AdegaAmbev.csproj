@@ -6,9 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Cliente\Entidades\" />
-    <Folder Include="Cliente\Console\" />
-    <Folder Include="Cliente\Service\" />
+    <Compile Remove="Cliente\**" />
+    <EmbeddedResource Remove="Cliente\**" />
+    <None Remove="Cliente\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Estoque\Entidades\" />
     <Folder Include="Estoque\Service\" />
   </ItemGroup>
