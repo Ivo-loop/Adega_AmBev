@@ -2,6 +2,7 @@
 using AdegaAmbev.Clientes.Service;
 using AdegaAmbev.Comum;
 using System;
+using TestRoots;
 
 namespace ClienteTestRoots
 {
@@ -10,6 +11,9 @@ namespace ClienteTestRoots
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            TipoBebidaServiceTeste tipoBebidaService = new TipoBebidaServiceTeste();
+            tipoBebidaService.testValidarCadastroTipoBebida();
+            tipoBebidaService.testValidarExisteTipoBebida();
         }
 
         public void testValidarDadosClientes()
@@ -23,7 +27,8 @@ namespace ClienteTestRoots
 
             var valor = clienteService.ValidarCliente(cliente);
 
-            if (valor != "sucesso") { 
+            if (valor != "sucesso")
+            {
                 CorLetraConsole.Vermelho();
                 Console.WriteLine("test de validar user falhando");
             }
