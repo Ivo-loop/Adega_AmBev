@@ -69,7 +69,7 @@ namespace AdegaAmbev.Produtos.Service
             return JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;
         }
 
-        public Produto GetId(int id)
+        public virtual Produto GetId(int id)
         {
             using FileStream stream = File.OpenRead(pathFile);
             var produtosDb = JsonSerializer.DeserializeAsync<List<Produto>>(stream).Result;

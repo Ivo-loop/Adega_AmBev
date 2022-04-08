@@ -2,6 +2,7 @@
 using AdegaAmbev.Estoque.Repository;
 using AdegaAmbev.Produtos.Service;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -77,9 +78,11 @@ namespace AdegaAmbev.Estoque.Service
             await _estoqueRepository.Create(estoque);
         }
 
-        public void VizualizarEstoque(ProdutoService produtos)
+        public void VizualizarEstoque(ProdutoService produtos, [Optional] bool testes)
         {
-            Console.Clear();
+            if (!testes)
+                Console.Clear();
+
             var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
 
             foreach(var estoque in todosEstoquesSalvos)
