@@ -1,5 +1,4 @@
 ﻿using AdegaAmbev.Comum;
-using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
 using AdegaAmbev.Produtos.Service;
 using System;

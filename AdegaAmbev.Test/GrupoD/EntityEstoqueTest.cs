@@ -4,12 +4,12 @@ namespace AdegaAmbev.Test.GrupoD
 {
     public class EntityEstoqueTest
     {
-        [Test]
-        public void Instanciar_QuandoRecebeInformacaoValida_DeveInstanciarObjetoEManterValores()
+        [TestCase(123, 10)]
+        [TestCase(542, 33)]
+        [TestCase(12, 123)]
+        public void Instanciar_QuandoRecebeInformacaoValida_DeveInstanciarObjetoEManterValores(int codigoProduto, int quantidadeInicial)
         {
             // Arrange
-            var codigoProduto = 123;
-            var quantidadeInicial = 10;
 
             // Act
             var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
@@ -19,14 +19,13 @@ namespace AdegaAmbev.Test.GrupoD
             Assert.AreEqual(codigoProduto, estoque.ProdutoId);
         }
 
-        [Test]
-        public void AtualizarQuantidade_QuandoRecebeInformacaoValida_DeveAtualizarQuantidadeEstoque()
+        [TestCase(123, 10, 50)]
+        [TestCase(542, 33, 3)]
+        [TestCase(12, 123, 17)]
+        public void AtualizarQuantidade_QuandoRecebeInformacaoValida_DeveAtualizarQuantidadeEstoque(int codigoProduto, int quantidadeInicial, int quantidadeAtualizada)
         {
             // Arrange
-            var codigoProduto = 123;
-            var quantidadeInicial = 10;
             var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
-            var quantidadeAtualizada = 50;
 
             // Act
             estoque.AtualizarQuantidade(quantidadeAtualizada);
@@ -36,20 +35,19 @@ namespace AdegaAmbev.Test.GrupoD
             Assert.AreEqual(codigoProduto, estoque.ProdutoId);
         }
 
-        [Test]
-        public void SubtrairQuantidade_QuandoRecebeInformacaoValida_DeveSubtrairQuantidadeEstoque()
+        [TestCase(123, 50, 10, 40)]
+        [TestCase(542, 33, 3, 30)]
+        [TestCase(12, 100, 17, 83)]
+        public void SubtrairQuantidade_QuandoRecebeInformacaoValida_DeveSubtrairQuantidadeEstoque(int codigoProduto, int quantidadeInicial, int quantidadeSubtrair, int quantidadeFinal )
         {
             // Arrange
-            var codigoProduto = 123;
-            var quantidadeInicial = 50;
             var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
-            var quantidadeAtualizada = 10;
 
             // Act
-            estoque.SubtrairQuantidade(quantidadeAtualizada);
+            estoque.SubtrairQuantidade(quantidadeSubtrair);
 
             // Assert
-            Assert.AreEqual(40, estoque.Quantidade);
+            Assert.AreEqual(quantidadeFinal, estoque.Quantidade);
             Assert.AreEqual(codigoProduto, estoque.ProdutoId);
         }
     }
