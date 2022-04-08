@@ -1,4 +1,5 @@
-﻿using AdegaAmbev.Estoque.Service;
+﻿using AdegaAmbev.Estoque.Repository;
+using AdegaAmbev.Estoque.Service;
 using System;
 using System.Threading;
 
@@ -8,6 +9,9 @@ namespace AdegaAmbev.Estoque.Menu
     {
         public static void Iniciar()
         {
+            var estoqueRepository = new EstoqueRepository();
+            var estoqueService = new EstoqueService(estoqueRepository);
+
             Console.Title = "Módulo Time D";
             Console.Clear();
             Console.WriteLine("Seja bem vindo ao módulo do time D\n");
@@ -18,11 +22,10 @@ namespace AdegaAmbev.Estoque.Menu
             Console.WriteLine("0 - Sair\n");
             Console.Write("Opção: ");
 
-
             switch (Console.ReadLine())
             {
                 case "1":
-                    EstoqueService.MenuEstoque();
+                    estoqueService.MenuEstoque();
                     break;
 
                 case "2":

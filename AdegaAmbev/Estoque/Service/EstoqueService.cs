@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 
 namespace AdegaAmbev.Estoque.Service
 {
-    public static class EstoqueService
+    public class EstoqueService
     {
-        private static readonly EstoqueRepository _estoqueRepository = new();
+        private readonly EstoqueRepository _estoqueRepository = new();
 
-        public static void MenuEstoque()
+        public EstoqueService(EstoqueRepository estoqueRepository)
+        {
+            _estoqueRepository = estoqueRepository;
+        }
+
+        public void MenuEstoque()
         {
             ProdutoService produtoService = new ProdutoService();
 
@@ -31,14 +36,14 @@ namespace AdegaAmbev.Estoque.Service
 
                 case "2":
                     CorConsole.Branco();
-                    VizualizarEstoque(produtoService).Wait();
+                    VizualizarEstoque(produtoService);
                     Console.ResetColor();
                     break;
 
                 case "3":
                     Console.Write("Digite o código do produto: ");
                     var codigoProduto = Convert.ToInt32(Console.ReadLine());
-                    VizualizarEstoquePorProduto(produtoService, codigoProduto).Wait();
+                    VizualizarEstoquePorProduto(produtoService, codigoProduto);
                     Console.ResetColor();
                     break;
                 case "0":
@@ -47,7 +52,7 @@ namespace AdegaAmbev.Estoque.Service
             MenuEstoque();
         }
 
-        public static async Task InserirEstoque(ProdutoService produtos)
+        public async Task InserirEstoque(ProdutoService produtos)
         {
             Console.Clear();
 
@@ -73,7 +78,7 @@ namespace AdegaAmbev.Estoque.Service
             await _estoqueRepository.Create(estoque);
         }
 
-        public static async Task VizualizarEstoque(ProdutoService produtos)
+        public void VizualizarEstoque(ProdutoService produtos)
         {
             Console.Clear();
             var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
@@ -90,7 +95,7 @@ namespace AdegaAmbev.Estoque.Service
             Console.ReadLine();
         }
 
-        public static async Task VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto)
+        public void VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto)
         {
             Console.Clear();
 

@@ -31,7 +31,7 @@ namespace AdegaAmbev.Estoque.Service
                     break;
 
                 case "2":
-                    MostrarTodasAsVendas().Wait();
+                    MostrarTodasAsVendas();
                     break;
 
                 case "0":
@@ -71,7 +71,7 @@ namespace AdegaAmbev.Estoque.Service
             vendaRepository.Create(venda);
         }
 
-        public static async Task MostrarTodasAsVendas()
+        public static void MostrarTodasAsVendas()
         {
             Console.Clear();
             var todasVendasSalvas = _vendaRepository.ObterTodos();
