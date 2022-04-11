@@ -7,12 +7,6 @@ namespace TestRoots
 {
     public class EstoqueTest
     {
-        //public EstoqueTest()
-        //{
-        //    Deve_Atualizar_Quantidade_Em_Estoque();
-        //    Deve_Subtrair_Quantidade_Em_Estoque();
-        //}
-
         public void Deve_Atualizar_Quantidade_Em_Estoque()
         {
             var nomeMetodo = MethodBase.GetCurrentMethod().Name;
