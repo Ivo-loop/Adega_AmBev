@@ -85,12 +85,19 @@ namespace AdegaAmbev.Estoque.Service
 
             var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
 
-            foreach(var estoque in todosEstoquesSalvos)
-            { 
-                var produto = produtos.GetId(estoque.ProdutoId);
-                Console.Write($"Produto Id = {estoque.ProdutoId} ");
-                Console.Write($"Nome Produto = {produto.Nome} ");
-                Console.Write($"Quantidade = {estoque.Quantidade}\n");
+            if (todosEstoquesSalvos.Count != 0)
+            {
+                foreach (var estoque in todosEstoquesSalvos)
+                {
+                    var produto = produtos.GetId(estoque.ProdutoId);
+                    Console.Write($"Produto Id = {estoque.ProdutoId} ");
+                    Console.Write($"Nome Produto = {produto.Nome} ");
+                    Console.Write($"Quantidade = {estoque.Quantidade}\n");
+                }
+            }
+            else
+            {
+                Console.Write("Nenhum item encontrado no estoque.\n");
             }
 
             Console.Write("\nAperte qualquer tecla para continuar...");

@@ -25,7 +25,7 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
         }
 
         [Test]
-        public void VisualizarEstoque_QuandoEhSelecionado_DeveMostrarTodosOsItensDoEstoque()
+        public void VisualizarEstoque_QuandoTiverItensNoEstoque_DeveMostrarTodosOsItensDoEstoque()
         {
             // Arrange
             var output = new StringWriter();
@@ -52,6 +52,27 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
             // Assert
             Assert.That(output.ToString(), Is.EqualTo(string
                 .Format("Produto Id = 123 Nome Produto = Stella Artois Quantidade = 15\nProduto Id = 456 Nome Produto = Budweiser Quantidade = 20\n\nAperte qualquer tecla para continuar...",
+                Environment.NewLine)));
+        }
+
+        [Test]
+        public void VisualizarEstoque_QuandoNaoTiverItensNoEstoque_DeveMostrarMensagemInformativa()
+        {
+            // Arrange
+            var output = new StringWriter();
+            Console.SetOut(output);
+
+            var input = new StringReader("");
+            Console.SetIn(input);
+            
+            _estoqueRepository.ObterTodos().Returns(new List<Estoque.Entidades.Estoque>());
+
+            // Act
+            _estoqueService.VizualizarEstoque(_produtoService, true);
+
+            // Assert
+            Assert.That(output.ToString(), Is.EqualTo(string
+                .Format("Nenhum item encontrado no estoque.\n\nAperte qualquer tecla para continuar...",
                 Environment.NewLine)));
         }
     }
