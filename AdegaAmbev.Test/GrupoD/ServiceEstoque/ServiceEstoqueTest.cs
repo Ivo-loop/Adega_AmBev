@@ -25,7 +25,7 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
         }
 
         [Test]
-        public void VisualizarEstoque_QuandoTiverItensNoEstoque_DeveMostrarTodosOsItensDoEstoque()
+        public void VisualizarEstoque_QuandoExistirItensNoEstoque_DeveMostrarTodosOsItensDoEstoque()
         {
             // Arrange
             var output = new StringWriter();
@@ -39,6 +39,7 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
                 new Estoque.Entidades.Estoque(123, 15),
                 new Estoque.Entidades.Estoque(456, 20)
             };
+
             _estoqueRepository.ObterTodos().Returns(estoque);
 
             var produto1 = new Produto("Stella Artois", "Cerveja", 7.99);
@@ -56,7 +57,7 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
         }
 
         [Test]
-        public void VisualizarEstoque_QuandoNaoTiverItensNoEstoque_DeveMostrarMensagemInformativa()
+        public void VisualizarEstoque_QuandoNaoExistirItensNoEstoque_DeveMostrarMensagemInformativa()
         {
             // Arrange
             var output = new StringWriter();

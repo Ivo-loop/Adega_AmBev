@@ -1,21 +1,27 @@
 ﻿using AdegaAmbev.Comum;
 using AdegaAmbev.Comum.Enums;
 using AdegaAmbev.Estoque.Entidades;
-using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AdegaAmbev.Estoque.Service
 {
-    public static class VendaService
+    public class VendaService
     {
-        private static readonly EstoqueRepository _estoqueRepository = new();
-        private static readonly VendaRepository _vendaRepository = new();
+        private readonly EstoqueRepository _estoqueRepository = new();
+        private readonly VendaRepository _vendaRepository = new();
 
-        public static void MenuVenda()
+        public VendaService(EstoqueRepository estoqueRepository, VendaRepository vendaRepository)
+        {
+            _estoqueRepository = estoqueRepository;
+            _vendaRepository = vendaRepository;
+        }
+
+        public void MenuVenda()
         {
             Console.Clear();
             Console.WriteLine("1 - Realizar Venda");
@@ -41,7 +47,7 @@ namespace AdegaAmbev.Estoque.Service
             MenuVenda();
         }
 
-        public static async Task RealizarVenda()
+        public async Task RealizarVenda()
         {
             Console.Clear();
 
@@ -71,24 +77,32 @@ namespace AdegaAmbev.Estoque.Service
             vendaRepository.Create(venda);
         }
 
-        public static void MostrarTodasAsVendas()
+        public void MostrarTodasAsVendas([Optional] bool testes)
         {
-            Console.Clear();
+            if (!testes)
+                Console.Clear();
+
             var todasVendasSalvas = _vendaRepository.ObterTodos();
 
-            foreach (var venda in todasVendasSalvas)
+            if (todasVendasSalvas.Count != 0)
             {
-                Console.WriteLine($"{venda}");
-                Console.WriteLine($"=====================================================\n");
+                foreach (var venda in todasVendasSalvas)
+                {
+                    Console.WriteLine($"{venda}");
+                    Console.WriteLine($"=====================================================\n");
+                }
+            }
+            else
+            {
+                Console.Write("Nenhuma venda registrada.\n");
             }
 
             Console.Write("\nAperte qualquer tecla para continuar...");
             Console.ReadLine();
         }
 
-        private static void AdicionarItens(List<VendaItem> itens, List<Produtos.Entidades.Produto> produtos)
+        private void AdicionarItens(List<VendaItem> itens, List<Produtos.Entidades.Produto> produtos)
         {
-
             string adicionarNovoProduto;
 
             do

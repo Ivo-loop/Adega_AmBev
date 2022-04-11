@@ -10,7 +10,9 @@ namespace AdegaAmbev.Estoque.Menu
         public static void Iniciar()
         {
             var estoqueRepository = new EstoqueRepository();
+            var vendaRepository = new VendaRepository();
             var estoqueService = new EstoqueService(estoqueRepository);
+            var vendaService = new VendaService(estoqueRepository, vendaRepository);
 
             Console.Title = "Módulo Time D";
             Console.Clear();
@@ -29,7 +31,7 @@ namespace AdegaAmbev.Estoque.Menu
                     break;
 
                 case "2":
-                    VendaService.MenuVenda();
+                    vendaService.MenuVenda();
                     break;
 
                 case "0":

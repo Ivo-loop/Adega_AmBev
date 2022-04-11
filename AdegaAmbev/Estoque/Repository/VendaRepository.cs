@@ -32,7 +32,7 @@ namespace AdegaAmbev.Estoque.Repository
             File.WriteAllText(Host, JsonSerializer.Serialize(bancoSerializado));
         }
 
-        public List<Venda> ObterTodos()
+        public virtual List<Venda> ObterTodos()
         {
             var banco = File.ReadAllText(Host);
 
