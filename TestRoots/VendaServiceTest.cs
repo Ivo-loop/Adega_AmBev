@@ -11,7 +11,6 @@ namespace TestRoots
     {
         public async void Deve_Realizar_Venda()
         {
-            limpar_banco();
             await VendaService.RealizarVenda();
 
             var vendasRepository = new VendaRepository();
@@ -28,10 +27,9 @@ namespace TestRoots
             }
         }
 
-        private void limpar_banco()
+        public void RodarTestesVendas()
         {
-            new BancoUtils("Produto.json");
-
+            Deve_Realizar_Venda();
         }
     }
 }
