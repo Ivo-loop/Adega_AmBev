@@ -1,7 +1,6 @@
 ﻿using AdegaAmbev.Comum;
 using AdegaAmbev.Comum.Enums;
 using AdegaAmbev.Estoque.Entidades;
-using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Estoque.Repository;
 using System;
 using System.Collections.Generic;
