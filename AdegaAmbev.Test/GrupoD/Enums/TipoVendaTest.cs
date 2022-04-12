@@ -3,7 +3,7 @@ using AdegaAmbev.Estoque.Entidades;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace AdegaAmbev.Test.GrupoD.Entidades
+namespace AdegaAmbev.Test.GrupoD.Enums
 {
     public class TipoVendaTest
     {
