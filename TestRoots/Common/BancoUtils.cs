@@ -7,7 +7,7 @@ namespace TestRoots.Common
         private string Path { get; set; }
         public BancoUtils(string path)
         {
-            Path = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\" + path;
+            Path = Directory.GetCurrentDirectory() + @"..\..\..\..\..\AdegaAmbev\Banco\" + path;
             this.ClearBanco();
         }
 

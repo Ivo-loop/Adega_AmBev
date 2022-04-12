@@ -1,5 +1,4 @@
-﻿using System;
-using TestRoots;
+﻿using TestRoots;
 
 namespace ClienteTestRoots
 {
@@ -7,8 +6,6 @@ namespace ClienteTestRoots
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            
             var tipoBebiba = new TipoBebidaServiceTeste();
             tipoBebiba.rodarTodosTestes();
 
@@ -17,6 +14,8 @@ namespace ClienteTestRoots
 
             var estoqueTest = new EstoqueTest();
             estoqueTest.ExcecutarTodosOsTestes();
+
+            MenuTesteProduto.IniciarMenuProduto();
         }
     }
 }
