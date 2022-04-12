@@ -65,7 +65,7 @@ namespace AdegaAmbev.Estoque.Repository
             return bancoSerializado.SingleOrDefault(x => x.ProdutoId == codigoEstoque);
         }
 
-        public async Task DescontarEstoque(List<VendaItem> itens)
+        public virtual async Task DescontarEstoque(List<VendaItem> itens)
         {
             var banco = File.ReadAllText(Host);
 

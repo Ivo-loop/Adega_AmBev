@@ -15,7 +15,7 @@ namespace AdegaAmbev.Estoque.Repository
             Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\Venda.json";
         }
 
-        public void Create(Venda venda)
+        public virtual void Create(Venda venda)
         {
             var banco = File.ReadAllText(Host);
 

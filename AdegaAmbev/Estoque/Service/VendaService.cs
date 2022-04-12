@@ -47,11 +47,10 @@ namespace AdegaAmbev.Estoque.Service
             MenuVenda();
         }
 
-        public async Task RealizarVenda()
+        public async Task RealizarVenda(bool clear = true)
         {
-            Console.Clear();
-
-            var vendaRepository = new VendaRepository();
+            if (clear)
+                Console.Clear();
 
             Console.WriteLine("Bem vindo ao menu para realizar VENDA\n");
 
@@ -74,7 +73,7 @@ namespace AdegaAmbev.Estoque.Service
             var venda = new Venda(codigoCliente, valorTotal, vendaItens, tipoVenda);
             await _estoqueRepository.DescontarEstoque(vendaItens);
 
-            vendaRepository.Create(venda);
+            _vendaRepository.Create(venda);
         }
 
         public void MostrarTodasAsVendas([Optional] bool testes)

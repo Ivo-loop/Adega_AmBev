@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using AdegaAmbev.Estoque.Entidades;
 using AdegaAmbev.Comum.Enums;
+using System.Threading.Tasks;
 
 namespace AdegaAmbev.Test.GrupoD.ServiceVenda
 {
@@ -77,6 +78,28 @@ namespace AdegaAmbev.Test.GrupoD.ServiceVenda
             Assert.That(output.ToString(), Is.EqualTo(string
                 .Format("Nenhuma venda registrada.\n\nAperte qualquer tecla para continuar...",
                 Environment.NewLine)));
+        }
+
+        [Test]
+        public async Task RealizarVenda_deve_realizar_uma_venda()
+        {
+            var output = new StringWriter();
+            Console.SetOut(output);
+
+            var input = new StringReader(@"1
+1
+1
+1
+N");
+            Console.SetIn(input);
+
+            _estoqueRepository.ObterPorCodigo(Arg.Any<int>()).Returns(
+                new Estoque.Entidades.Estoque(1, 1));
+
+            await _vendaService.RealizarVenda(false);
+
+            await _estoqueRepository.Received().DescontarEstoque(Arg.Any<List<VendaItem>>());
+            _vendaRepository.Received().Create(Arg.Any<Venda>());
         }
     }
 }
