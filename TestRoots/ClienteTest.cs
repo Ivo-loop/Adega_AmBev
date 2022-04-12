@@ -3,6 +3,7 @@ using AdegaAmbev.Clientes.Service;
 using AdegaAmbev.Comum;
 using System;
 using System.Linq;
+using TestRoots.Common;
 
 namespace TestRoots
 {
@@ -12,6 +13,7 @@ namespace TestRoots
         public void Deve_Validar_Os_Dados_Do_Cliente()
         {
             Console.WriteLine("\nTeste validar cliente:");
+            limpar_banco();
 
             Cliente cliente = new Cliente()
             {
@@ -37,6 +39,7 @@ namespace TestRoots
         public void Deve_Cadastrar_O_Cliente()
         {
             Console.WriteLine("\nTeste cadastrar cliente:");
+            limpar_banco();
 
             Cliente cliente = new Cliente()
             {
@@ -62,6 +65,7 @@ namespace TestRoots
         public void Deve_Obter_Todos_Os_Clientes()
         {
             Console.WriteLine("\nTeste obter todos os clientes:");
+            limpar_banco();
 
             Cliente cliente1 = new Cliente()
             {
@@ -95,6 +99,7 @@ namespace TestRoots
         public void Deve_Filtar_Cliente_Por_Nome()
         {
             Console.WriteLine("\nTeste filtrar cliente por email:");
+            limpar_banco();
 
             Cliente cliente = new Cliente()
             {
@@ -120,6 +125,7 @@ namespace TestRoots
         public void Deve_Filtar_Cliente_Por_Email()
         {
             Console.WriteLine("\nTeste filtrar cliente por email:");
+            limpar_banco();
 
             Cliente cliente = new Cliente()
             {
@@ -128,7 +134,7 @@ namespace TestRoots
             };
 
             _clienteService.CadastrarCliente(cliente);
-            var clienteCadastrado = _clienteService.FiltrarClientePorNome(cliente.Email);
+            var clienteCadastrado = _clienteService.FiltrarClientePorEmail(cliente.Email);
 
             if (clienteCadastrado.Email == cliente.Email)
             {
@@ -149,6 +155,11 @@ namespace TestRoots
             Deve_Obter_Todos_Os_Clientes();
             Deve_Filtar_Cliente_Por_Nome();
             Deve_Filtar_Cliente_Por_Email();
+        }
+
+        private void limpar_banco()
+        {
+            new BancoUtils("Cliente.json");
         }
     }
 }

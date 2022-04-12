@@ -240,8 +240,7 @@ namespace TestRoots
         private void limpar_banco() 
         {
              new BancoUtils("Produto.json");
- 
-        }
 
+        }
     }
 }
