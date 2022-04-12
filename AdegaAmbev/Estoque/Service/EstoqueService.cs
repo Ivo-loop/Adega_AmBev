@@ -1,8 +1,8 @@
 ﻿using AdegaAmbev.Comum;
 using AdegaAmbev.Estoque.Repository;
 using AdegaAmbev.Produtos.Service;
+using AdegaAmbev.Utils.Interface;
 using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,40 +11,42 @@ namespace AdegaAmbev.Estoque.Service
     public class EstoqueService
     {
         private readonly EstoqueRepository _estoqueRepository = new();
+        private readonly IConsoleAgregator _console;
 
-        public EstoqueService(EstoqueRepository estoqueRepository)
+        public EstoqueService(EstoqueRepository estoqueRepository, IConsoleAgregator consoleAgregator)
         {
             _estoqueRepository = estoqueRepository;
+            _console = consoleAgregator;
         }
 
         public virtual void MenuEstoque()
         {
             ProdutoService produtoService = new ProdutoService();
 
-            Console.Clear();
-            Console.WriteLine("1 - Inserir Estoque");
-            Console.WriteLine("2 - Vizualizar Estoque");
-            Console.WriteLine("3 - Vizualizar Estoque Por Produto");
-            Console.WriteLine("0 - Voltar\n");
-            Console.Write("Opção: ");
+            _console.Clear();
+            _console.WriteLine("1 - Inserir Estoque");
+            _console.WriteLine("2 - Vizualizar Estoque");
+            _console.WriteLine("3 - Vizualizar Estoque Por Produto");
+            _console.WriteLine("0 - Voltar\n");
+            _console.Write("Opção: ");
 
-            switch (Console.ReadLine())
+            switch (_console.ReadLine())
             {
                 case "1":
                     InserirEstoque(produtoService).Wait();
                     break;
 
                 case "2":
-                    CorConsole.Branco();
+                    _console.Branco();
                     VizualizarEstoque(produtoService);
-                    Console.ResetColor();
+                    _console.ResetColor();
                     break;
 
                 case "3":
-                    Console.Write("Digite o código do produto: ");
+                    _console.Write("Digite o código do produto: ");
                     var codigoProduto = Convert.ToInt32(Console.ReadLine());
                     VizualizarEstoquePorProduto(produtoService, codigoProduto);
-                    Console.ResetColor();
+                    _console.ResetColor();
                     break;
                 case "0":
                     return;
@@ -52,23 +54,22 @@ namespace AdegaAmbev.Estoque.Service
             MenuEstoque();
         }
 
-        public async Task InserirEstoque(ProdutoService produtos, bool isNotTest = true)
+        public async Task InserirEstoque(ProdutoService produtos)
         {
-            if (isNotTest) Console.Clear();
+            _console.Clear();
+            _console.WriteLine("Bem vindo ao Menu para inserir ESTOQUE\n");
+            _console.Write("Digite o código do produto: ");
 
-            Console.WriteLine("Bem vindo ao Menu para inserir ESTOQUE\n");
-            
-            Console.Write("Digite o código do produto: ");
-            var codigoProduto = Convert.ToInt32(Console.ReadLine());
+            var codigoProduto = Convert.ToInt32(_console.ReadLine());
 
             if (!produtos.ExisteProduto(codigoProduto))
             {
-                Console.WriteLine("Produto não existe");
+                _console.WriteLine("Produto não existe");
                 return;
             }
 
-            Console.Write("Digite a quantidade: ");
-            var quantidade = Convert.ToInt32(Console.ReadLine());
+            _console.Write("Digite a quantidade: ");
+            var quantidade = Convert.ToInt32(_console.ReadLine());
             if (!EhQuantidadeValida(quantidade))
             {
                 return;
@@ -78,10 +79,9 @@ namespace AdegaAmbev.Estoque.Service
             await _estoqueRepository.Create(estoque);
         }
 
-        public void VizualizarEstoque(ProdutoService produtos, [Optional] bool testes)
+        public void VizualizarEstoque(ProdutoService produtos)
         {
-            if (!testes)
-                Console.Clear();
+            _console.Clear();
 
             var todosEstoquesSalvos = _estoqueRepository.ObterTodos();
 
@@ -90,32 +90,31 @@ namespace AdegaAmbev.Estoque.Service
                 foreach (var estoque in todosEstoquesSalvos)
                 {
                     var produto = produtos.GetId(estoque.ProdutoId);
-                    Console.Write($"Produto Id = {estoque.ProdutoId} ");
-                    Console.Write($"Nome Produto = {produto.Nome} ");
-                    Console.Write($"Quantidade = {estoque.Quantidade}\n");
+                    _console.Write($"Produto Id = {estoque.ProdutoId} ");
+                    _console.Write($"Nome Produto = {produto.Nome} ");
+                    _console.Write($"Quantidade = {estoque.Quantidade}\n");
                 }
             }
             else
             {
-                Console.Write("Nenhum item encontrado no estoque.\n");
+                _console.Write("Nenhum item encontrado no estoque.\n");
             }
 
-            Console.Write("\nAperte qualquer tecla para continuar...");
-            Console.ReadLine();
+            _console.Write("\nAperte qualquer tecla para continuar...");
+            _console.ReadLine();
         }
 
-        public void VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto, [Optional] bool testes)
+        public void VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto)
         {
-            if (!testes)
-                Console.Clear();
+            _console.Clear();
 
             var estoque = _estoqueRepository.ObterPorCodigo(codigoProduto);
 
-            if(estoque == null)
+            if (estoque == null)
             {
                 CorLetraConsole.Vermelho();
-                Console.Write("Código de estoque não encontrado na base de dados.");
-                Console.ResetColor();
+                _console.Write("Código de estoque não encontrado na base de dados.");
+                _console.ResetColor();
                 Thread.Sleep(3000);
                 return;
             }
@@ -123,20 +122,20 @@ namespace AdegaAmbev.Estoque.Service
             CorConsole.Branco();
 
             var produto = produtos.GetId(estoque.ProdutoId);
-            Console.Write($"Produto Id = {estoque.ProdutoId}");
-            Console.Write($" Nome Produto = {produto.Nome} ");
-            Console.Write($"Quantidade = {estoque.Quantidade}\n");
+            _console.Write($"Produto Id = {estoque.ProdutoId}");
+            _console.Write($" Nome Produto = {produto.Nome} ");
+            _console.Write($"Quantidade = {estoque.Quantidade}\n");
 
-            Console.Write("\nAperte qualquer tecla para continuar...");
-            Console.ReadLine();
+            _console.Write("\nAperte qualquer tecla para continuar...");
+            _console.ReadLine();
         }
 
-        private static bool EhQuantidadeValida(int codigo)
+        private bool EhQuantidadeValida(int codigo)
         {
             if (codigo <= 0)
             {
-                Console.WriteLine($"\nA quantidade informada é inválida. Código precisa ser positivo");
-                Console.WriteLine($"Não será realizada alteração no estoque.");
+                _console.WriteLine($"\nA quantidade informada é inválida. Código precisa ser positivo");
+                _console.WriteLine($"Não será realizada alteração no estoque.");
                 Thread.Sleep(5000);
                 return false;
             }

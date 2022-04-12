@@ -1,13 +1,10 @@
 ﻿using AdegaAmbev.Estoque.Repository;
 using AdegaAmbev.Estoque.Service;
+using AdegaAmbev.Utils.Interface;
 using NSubstitute;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdegaAmbev.Test.GrupoD.Menu
 {
@@ -17,14 +14,16 @@ namespace AdegaAmbev.Test.GrupoD.Menu
         private VendaService _vendaService;
         private EstoqueRepository _estoqueRepository;
         private VendaRepository _vendaRepository;
+        private IConsoleAgregator _consoleAgregator;
 
         [SetUp]
         public void Setup()
         {
             _estoqueRepository = Substitute.For<EstoqueRepository>();
             _vendaRepository = Substitute.For<VendaRepository>();
-            _estoqueService = Substitute.For<EstoqueService>(_estoqueRepository);
+            _estoqueService = Substitute.For<EstoqueService>(_estoqueRepository, _consoleAgregator);
             _vendaService = Substitute.For<VendaService>(_estoqueRepository, _vendaRepository);
+            _consoleAgregator = Substitute.For<IConsoleAgregator>();
         }
 
         [Test]

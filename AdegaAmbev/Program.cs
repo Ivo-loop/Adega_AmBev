@@ -5,6 +5,7 @@ using AdegaAmbev.Produtos.Menu;
 using AdegaAmbev.Comum;
 using AdegaAmbev.Estoque.Repository;
 using AdegaAmbev.Estoque.Service;
+using AdegaAmbev.Utils;
 
 namespace AdegaAmbev
 {
@@ -17,9 +18,11 @@ namespace AdegaAmbev
 
         public static void StartMenu()
         {
+            var _consoleAgregator = new ConsoleAgregator();
+
             var estoqueRepository = new EstoqueRepository();
             var vendaRepository = new VendaRepository();
-            var estoqueService = new EstoqueService(estoqueRepository);
+            var estoqueService = new EstoqueService(estoqueRepository, _consoleAgregator);
             var vendaService = new VendaService(estoqueRepository, vendaRepository);
 
             Console.Title = "Projeto Adega";
@@ -49,7 +52,7 @@ namespace AdegaAmbev
                     case '3':
                         Console.Clear();
                         Console.ReadLine();
-                        GrupoDMenu.Iniciar(estoqueService, vendaService, false);
+                        GrupoDMenu.Iniciar(estoqueService, vendaService);
                         break;
                     case '0':
                         Environment.Exit(0);

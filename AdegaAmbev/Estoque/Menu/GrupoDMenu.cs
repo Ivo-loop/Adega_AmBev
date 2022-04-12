@@ -1,16 +1,17 @@
-﻿using AdegaAmbev.Estoque.Repository;
-using AdegaAmbev.Estoque.Service;
+﻿using AdegaAmbev.Estoque.Service;
 using System;
+using AdegaAmbev.Utils.Interface;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace AdegaAmbev.Estoque.Menu
 {
     public static class GrupoDMenu
     {
-        public static void Iniciar(EstoqueService estoqueService, VendaService vendaService, bool ehTeste)
+        public static void Iniciar(EstoqueService estoqueService, VendaService vendaService, [Optional] bool ehTeste)
         {
             Console.Title = "Módulo Time D";
-            if(!ehTeste)
+            if (!ehTeste)
                 Console.Clear();
             Console.WriteLine("Seja bem vindo ao módulo do time D\n");
 
