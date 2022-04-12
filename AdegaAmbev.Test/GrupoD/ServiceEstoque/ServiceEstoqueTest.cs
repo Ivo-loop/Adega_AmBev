@@ -161,5 +161,52 @@ namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
             Assert.That(outPut.ToString(), Is.EqualTo($"{expectWelcomeMenu}\r\n{expectCodigoProduto}{expectQuantity}\n{expectErrorOne}\r\n{expectErrorTwo}\r\n"));
             await _estoqueRepository.DidNotReceive().Create(Arg.Any<EstoqueEntity>());
         }
+
+        [Test]
+        public void VizualizarEstoquePorProduto_QuandoRecebeCodigoValido_DeveRetornarProduto()
+        {
+            // Arrange
+            var output = new StringWriter();
+            Console.SetOut(output);
+
+            var input = new StringReader("");
+            Console.SetIn(input);
+
+            var estoque = new Estoque.Entidades.Estoque(111, 10);
+
+            _estoqueRepository.ObterPorCodigo(111).Returns(estoque);
+
+            var produto = new Produto("Vinho Rosé", "Vinhos", 49.90);
+            _produtoService.GetId(111).Returns(produto);
+
+        
+            // Act
+            _estoqueService.VizualizarEstoquePorProduto(_produtoService, 111, true);
+
+            // Assert
+            Assert.That(output.ToString(), Is.EqualTo(string
+                .Format("Produto Id = 111 Nome Produto = Vinho Rosé Quantidade = 10\n\nAperte qualquer tecla para continuar...",
+                Environment.NewLine)));
+        }
+
+        [Test]
+        public void VizualizarEstoquePorProduto_QuandoRecebeCodigoInvalido_DeveRetornarErro()
+        {
+            // Arrange
+            var output = new StringWriter();
+            Console.SetOut(output);
+
+            EstoqueEntity estoque = null;
+
+            _estoqueRepository.ObterPorCodigo(111).Returns(estoque);
+
+            // Act
+            _estoqueService.VizualizarEstoquePorProduto(_produtoService, 111, true);
+
+            // Assert
+            Assert.That(output.ToString(), Is.EqualTo(string
+                .Format("Código de estoque não encontrado na base de dados.",
+                Environment.NewLine)));
+        }
     }
 }

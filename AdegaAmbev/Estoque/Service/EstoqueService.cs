@@ -104,9 +104,10 @@ namespace AdegaAmbev.Estoque.Service
             Console.ReadLine();
         }
 
-        public void VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto)
+        public void VizualizarEstoquePorProduto(ProdutoService produtos, int codigoProduto, [Optional] bool testes)
         {
-            Console.Clear();
+            if (!testes)
+                Console.Clear();
 
             var estoque = _estoqueRepository.ObterPorCodigo(codigoProduto);
 
