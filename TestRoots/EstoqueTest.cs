@@ -7,7 +7,7 @@ namespace TestRoots
 {
     public class EstoqueTest
     {
-        public void Deve_Atualizar_Quantidade_Em_Estoque()
+        public void Deve_atualizar_quantidade_em_estoque()
         {
             var nomeMetodo = MethodBase.GetCurrentMethod().Name;
 
@@ -29,7 +29,7 @@ namespace TestRoots
             Console.ResetColor();
         }
 
-        public void Deve_Subtrair_Quantidade_Em_Estoque()
+        public void Deve_subtrair_quantidade_em_estoque()
         {
             var nomeMetodo = MethodBase.GetCurrentMethod().Name;
 
