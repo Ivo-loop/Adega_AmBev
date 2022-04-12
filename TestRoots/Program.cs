@@ -2,6 +2,7 @@
 using AdegaAmbev.Clientes.Service;
 using AdegaAmbev.Comum;
 using System;
+using TestRoots;
 
 namespace ClienteTestRoots
 {
@@ -10,6 +11,9 @@ namespace ClienteTestRoots
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            
+            var clienteTest = new ClienteTest();
+            clienteTest.RodarTestesCliente();
         }
     }
 }

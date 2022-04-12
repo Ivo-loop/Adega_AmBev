@@ -145,9 +145,13 @@ namespace TestRoots
             }
         }
 
-        public void Deve_Atualizar_Cliente()
+        public void RodarTestesCliente()
         {
-            
+            Deve_Validar_Os_Dados_Do_Cliente();
+            Deve_Cadastrar_O_Cliente();
+            Deve_Obter_Todos_Os_Clientes();
+            Deve_Filtar_Cliente_Por_Nome();
+            Deve_Filtar_Cliente_Por_Email();
         }
     }
 }
