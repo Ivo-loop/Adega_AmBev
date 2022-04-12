@@ -11,9 +11,9 @@ namespace ClienteTestRoots
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            TipoBebidaServiceTeste tipoBebidaService = new TipoBebidaServiceTeste();
-            tipoBebidaService.testValidarCadastroTipoBebida();
-            tipoBebidaService.testValidarExisteTipoBebida();
+            
+            var tipoBebiba = new TipoBebidaServiceTeste();
+            tipoBebiba.redarTodosTestes();
         }
 
         public void testValidarDadosClientes()

@@ -19,6 +19,12 @@ namespace TestRoots
             diretorio = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\TipoBebida.json";
         }
 
+        public void redarTodosTestes()
+        {
+            testValidarCadastroTipoBebida();
+            testValidarExisteTipoBebida();
+        }
+
         public void testValidarCadastroTipoBebida()
         {
             var tipoBebidaModel = new TipoBebida()
