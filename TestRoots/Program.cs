@@ -11,25 +11,12 @@ namespace ClienteTestRoots
             
             var tipoBebiba = new TipoBebidaServiceTeste();
             tipoBebiba.rodarTodosTestes();
-        }
 
             var clienteTest = new ClienteTest();
             clienteTest.RodarTestesCliente();
 
-            var valor = clienteService.ValidarCliente(cliente);
-
-            if (valor != "sucesso")
-            {
-                CorLetraConsole.Vermelho();
-                Console.WriteLine("test de validar user falhando");
-            }
-            else
-            {
-                CorLetraConsole.Verde();
-                Console.WriteLine("deu sucesso");
-                Console.ResetColor();
-            }
-
+            var estoqueTest = new EstoqueTest();
+            estoqueTest.ExcecutarTodosOsTestes();
         }
     }
 }
