@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using AdegaAmbev.Estoque.Entidades;
 using AdegaAmbev.Comum.Enums;
 
-namespace AdegaAmbev.Test.GrupoD.ServiceEstoque
+namespace AdegaAmbev.Test.GrupoD.ServiceVenda
 {
     public class ServiceVendaTest
     {
