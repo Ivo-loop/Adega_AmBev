@@ -42,7 +42,7 @@ namespace AdegaAmbev.Test.GrupoD.Entidades
             itens.ForEach(x => itensString += $"{x} // ");
 
             // Assert
-            Assert.AreEqual("\r\n    Cliente Id = 10\r\n    Valor Total = 10,5\r\n    Tipo Venda = DELIVERY\r\n    Itens:\r\n        Produto Id = 1  Quantidade = 2 // ", resultado);
+            Assert.AreEqual($"\r\n    Cliente Id = {venda.ClienteId}\r\n    Valor Total = {venda.ValorTotal}\r\n    Tipo Venda = {venda.TipoVenda}\r\n    Itens:\r\n        {itensString}", resultado);
         }
     }
 }
