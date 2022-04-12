@@ -13,8 +13,7 @@ namespace ClienteTestRoots
             clienteTest.RodarTestesCliente();
 
             var estoqueTest = new EstoqueTest();
-            estoqueTest.Deve_atualizar_quantidade_em_estoque();
-            estoqueTest.Deve_subtrair_quantidade_em_estoque();
+            estoqueTest.ExcecutarTodosOsTestes();
         }
     }
 }
