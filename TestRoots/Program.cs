@@ -1,7 +1,4 @@
-﻿using AdegaAmbev.Clientes.Entidades;
-using AdegaAmbev.Clientes.Service;
-using System;
-using TestRoots;
+﻿using TestRoots;
 
 namespace ClienteTestRoots
 {
@@ -9,8 +6,16 @@ namespace ClienteTestRoots
     {
         static void Main(string[] args)
         {
+            var tipoBebiba = new TipoBebidaServiceTeste();
+            tipoBebiba.rodarTodosTestes();
+
+            var clienteTest = new ClienteTest();
+            clienteTest.RodarTestesCliente();
+
+            var estoqueTest = new EstoqueTest();
+            estoqueTest.ExcecutarTodosOsTestes();
+
             MenuTesteProduto.IniciarMenuProduto();
         }
-
     }
 }
