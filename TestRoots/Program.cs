@@ -1,7 +1,4 @@
-﻿using AdegaAmbev.Clientes.Entidades;
-using AdegaAmbev.Clientes.Service;
-using AdegaAmbev.Comum;
-using System;
+﻿using System;
 using TestRoots;
 
 namespace ClienteTestRoots
@@ -16,14 +13,8 @@ namespace ClienteTestRoots
             tipoBebiba.rodarTodosTestes();
         }
 
-        public void testValidarDadosClientes()
-        {
-            ClienteService clienteService = new ClienteService();
-            Cliente cliente = new Cliente()
-            {
-                Nome = "josue",
-                Email = "josue.santos@gmail.com.br"
-            };
+            var clienteTest = new ClienteTest();
+            clienteTest.RodarTestesCliente();
 
             var valor = clienteService.ValidarCliente(cliente);
 
