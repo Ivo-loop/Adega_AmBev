@@ -8,12 +8,28 @@ namespace ClienteTestRoots
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            
+            var tipoBebiba = new TipoBebidaServiceTeste();
+            tipoBebiba.rodarTodosTestes();
+        }
 
             var clienteTest = new ClienteTest();
             clienteTest.RodarTestesCliente();
 
-            var estoqueTest = new EstoqueTest();
-            estoqueTest.ExcecutarTodosOsTestes();
+            var valor = clienteService.ValidarCliente(cliente);
+
+            if (valor != "sucesso")
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine("test de validar user falhando");
+            }
+            else
+            {
+                CorLetraConsole.Verde();
+                Console.WriteLine("deu sucesso");
+                Console.ResetColor();
+            }
+
         }
     }
 }
