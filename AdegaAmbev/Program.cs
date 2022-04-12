@@ -3,6 +3,8 @@ using System;
 using AdegaAmbev.Estoque.Menu;
 using AdegaAmbev.Produtos.Menu;
 using AdegaAmbev.Comum;
+using AdegaAmbev.Estoque.Repository;
+using AdegaAmbev.Estoque.Service;
 
 namespace AdegaAmbev
 {
@@ -15,6 +17,11 @@ namespace AdegaAmbev
 
         public static void StartMenu()
         {
+            var estoqueRepository = new EstoqueRepository();
+            var vendaRepository = new VendaRepository();
+            var estoqueService = new EstoqueService(estoqueRepository);
+            var vendaService = new VendaService(estoqueRepository, vendaRepository);
+
             Console.Title = "Projeto Adega";
             CorConsole.Branco();
             Console.WriteLine("Escola um dos Menus Senhor Admin\n");
@@ -42,7 +49,7 @@ namespace AdegaAmbev
                     case '3':
                         Console.Clear();
                         Console.ReadLine();
-                        GrupoDMenu.Iniciar();
+                        GrupoDMenu.Iniciar(estoqueService, vendaService, false);
                         break;
                     case '0':
                         Environment.Exit(0);

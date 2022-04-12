@@ -21,7 +21,7 @@ namespace AdegaAmbev.Estoque.Service
             _vendaRepository = vendaRepository;
         }
 
-        public void MenuVenda()
+        public virtual void MenuVenda()
         {
             Console.Clear();
             Console.WriteLine("1 - Realizar Venda");

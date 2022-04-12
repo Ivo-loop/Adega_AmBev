@@ -7,15 +7,11 @@ namespace AdegaAmbev.Estoque.Menu
 {
     public static class GrupoDMenu
     {
-        public static void Iniciar()
+        public static void Iniciar(EstoqueService estoqueService, VendaService vendaService, bool ehTeste)
         {
-            var estoqueRepository = new EstoqueRepository();
-            var vendaRepository = new VendaRepository();
-            var estoqueService = new EstoqueService(estoqueRepository);
-            var vendaService = new VendaService(estoqueRepository, vendaRepository);
-
             Console.Title = "Módulo Time D";
-            Console.Clear();
+            if(!ehTeste)
+                Console.Clear();
             Console.WriteLine("Seja bem vindo ao módulo do time D\n");
 
             Console.WriteLine("Digite a opção que você deseja\n");
@@ -38,10 +34,11 @@ namespace AdegaAmbev.Estoque.Menu
                     return;
 
                 default:
-                    Console.Clear();
+                    if (!ehTeste)
+                        Console.Clear();
                     Console.WriteLine("Opção invalida, tente novamente...\n");
                     Thread.Sleep(2000);
-                    Iniciar();
+                    Iniciar(estoqueService, vendaService, ehTeste);
                     break;
             }
         }

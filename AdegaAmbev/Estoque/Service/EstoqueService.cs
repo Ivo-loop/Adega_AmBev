@@ -17,7 +17,7 @@ namespace AdegaAmbev.Estoque.Service
             _estoqueRepository = estoqueRepository;
         }
 
-        public void MenuEstoque()
+        public virtual void MenuEstoque()
         {
             ProdutoService produtoService = new ProdutoService();
 
