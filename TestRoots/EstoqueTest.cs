@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace TestRoots
 {
-    public class EstoqueTest
+    internal class EstoqueTest
     {
         public void Deve_atualizar_quantidade_em_estoque()
         {

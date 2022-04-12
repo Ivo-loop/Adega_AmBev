@@ -1,7 +1,4 @@
-﻿using AdegaAmbev.Clientes.Entidades;
-using AdegaAmbev.Clientes.Service;
-using AdegaAmbev.Comum;
-using System;
+﻿using System;
 using TestRoots;
 
 namespace ClienteTestRoots
@@ -11,9 +8,13 @@ namespace ClienteTestRoots
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            
+
             var clienteTest = new ClienteTest();
             clienteTest.RodarTestesCliente();
+
+            var estoqueTest = new EstoqueTest();
+            estoqueTest.Deve_atualizar_quantidade_em_estoque();
+            estoqueTest.Deve_subtrair_quantidade_em_estoque();
         }
     }
 }
