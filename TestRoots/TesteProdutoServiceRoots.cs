@@ -145,17 +145,15 @@ namespace TestRoots
         public void Deve_retornar_mensagem_de_falso_ao_buscar_um_produto_por_id()
         {
             limpar_banco();
-            var produtos = _produtoService.GetId(1);
-
-            if (produtos.Id == 1)
+            try
             {
-                CorLetraConsole.Vermelho();
-                Console.WriteLine("Teste falhou, TRUE, uma lista contendo o produto foi retornada");
+                var produtos = _produtoService.GetId(1);
             }
-            else
+            catch (Exception e)
             {
-                CorLetraConsole.Verde();
-                Console.WriteLine("Teste passou, FALSO, nenhuma lista de produtos foi retornada");
+                if (e.Source != null)
+                    Console.WriteLine("Teste passou, FALSO, nenhuma lista de produtos foi retornada", e.Source);
+                throw;
             }
         }
 
