@@ -16,7 +16,7 @@ namespace AdegaAmbev.Estoque.Repository
             Host = Directory.GetCurrentDirectory() + @"..\..\..\..\Banco\Estoque.json";
         }
 
-        public async Task Create(Entidades.Estoque estoque)
+        public virtual async Task Create(Entidades.Estoque estoque)
         {
             var banco = File.ReadAllText(Host);
             if (banco == "")

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using EstoqueEntity = AdegaAmbev.Estoque.Entidades.Estoque;
 
 namespace AdegaAmbev.Test.GrupoD.Entidades
 {
@@ -12,7 +13,7 @@ namespace AdegaAmbev.Test.GrupoD.Entidades
             // Arrange
 
             // Act
-            var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
+            var estoque = new EstoqueEntity(codigoProduto, quantidadeInicial);
 
             // Assert
             Assert.AreEqual(quantidadeInicial, estoque.Quantidade);
@@ -25,7 +26,7 @@ namespace AdegaAmbev.Test.GrupoD.Entidades
         public void AtualizarQuantidade_QuandoRecebeInformacaoValida_DeveAtualizarQuantidadeEstoque(int codigoProduto, int quantidadeInicial, int quantidadeAtualizada)
         {
             // Arrange
-            var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
+            var estoque = new EstoqueEntity(codigoProduto, quantidadeInicial);
 
             // Act
             estoque.AtualizarQuantidade(quantidadeAtualizada);
@@ -41,7 +42,7 @@ namespace AdegaAmbev.Test.GrupoD.Entidades
         public void SubtrairQuantidade_QuandoRecebeInformacaoValida_DeveSubtrairQuantidadeEstoque(int codigoProduto, int quantidadeInicial, int quantidadeSubtrair, int quantidadeFinal )
         {
             // Arrange
-            var estoque = new Estoque.Entidades.Estoque(codigoProduto, quantidadeInicial);
+            var estoque = new EstoqueEntity(codigoProduto, quantidadeInicial);
 
             // Act
             estoque.SubtrairQuantidade(quantidadeSubtrair);

@@ -78,7 +78,7 @@ namespace AdegaAmbev.Produtos.Service
             return produtosDb.First(x => x.Id == id);
         }
 
-        public bool ExisteProduto(int id)
+        public virtual bool ExisteProduto(int id)
         {
             using FileStream stream = File.OpenRead(pathFile);
             var produtosDb = JsonSerializer.DeserializeAsync<List<TipoBebida>>(stream).Result;

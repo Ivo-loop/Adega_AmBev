@@ -52,9 +52,9 @@ namespace AdegaAmbev.Estoque.Service
             MenuEstoque();
         }
 
-        public async Task InserirEstoque(ProdutoService produtos)
+        public async Task InserirEstoque(ProdutoService produtos, bool isNotTest = true)
         {
-            Console.Clear();
+            if (isNotTest) Console.Clear();
 
             Console.WriteLine("Bem vindo ao Menu para inserir ESTOQUE\n");
             
