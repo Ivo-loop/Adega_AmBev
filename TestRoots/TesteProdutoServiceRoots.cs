@@ -159,6 +159,78 @@ namespace TestRoots
             }
         }
 
+        public void Deve_retornar_mensagem_de_verdadeiro_ao_verificar_se_existe_produto()
+        {
+            limpar_banco();
+            var inserirProduto = cadastrar_produto_no_banco();
+            var produtos = _produtoService.ExisteProduto(1);
+
+            if (produtos && inserirProduto)
+            {
+                CorLetraConsole.Verde();
+                Console.WriteLine("Um produdo criado no banco \n");
+                Console.WriteLine("Teste passou, TRUE, esse produto existe");
+            }
+            else
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine("Teste falhou, FALSO, esse produto existe, mas não foi encontrado");
+            }
+        }
+
+        public void Deve_retornar_mensagem_de_falso_ao_verificar_se_existe_produto()
+        {
+            limpar_banco();
+            var produtos = _produtoService.ExisteProduto(1);
+
+            if (produtos)
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine("Teste falhou, TRUE, esse produto não existe, mas foi encontrado um no banco");
+            }
+            else
+            {
+                CorLetraConsole.Verde();
+                Console.WriteLine("Teste passou, FALSO, esse produto existe, por isso não foi encontrado");
+            }
+        }
+
+        public void Deve_retornar_mensagem_de_verdadeiro_ao_buscar_um_produto_por_filtro()
+        {
+            limpar_banco();
+            var inserirProduto = cadastrar_produto_no_banco();
+            var produtos = _produtoService.BuscarProdutosPorFiltros("Skol", "Cerveja");
+
+            if (inserirProduto && produtos.Count >= 1)
+            {
+                CorLetraConsole.Verde();
+                Console.WriteLine("Um produdo criado no banco \n");
+                Console.WriteLine("Teste passou, TRUE, uma lista contendo o (s) produto (s) foi retornada");
+            }
+            else
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine("Teste falhou, FALSO, nenhuma lista de produtos foi retornada");
+            }
+        }
+
+        public void Deve_retornar_mensagem_de_falso_ao_buscar_um_produto_por_filtro()
+        {
+            limpar_banco();
+            var produtos = _produtoService.BuscarProdutosPorFiltros("Skol", "Cerveja");
+
+            if (produtos.Count >= 1)
+            {
+                CorLetraConsole.Vermelho();
+                Console.WriteLine("Teste falhou, TRUE, esse produto não existe, mas lista contendo o (s) produto (s) foi retornada");
+            }
+            else
+            {
+                CorLetraConsole.Verde();
+                Console.WriteLine("Teste passou, FALSO, nenhuma lista de produtos foi retornada");
+            }
+        }
+
         private bool cadastrar_produto_no_banco() 
         {
             Produto produto = new Produto("Skol", "Cerveja", 3.48);
