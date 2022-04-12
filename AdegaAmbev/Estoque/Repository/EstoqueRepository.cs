@@ -52,7 +52,7 @@ namespace AdegaAmbev.Estoque.Repository
             return bancoSerializado;
         }
 
-        public Entidades.Estoque ObterPorCodigo(int codigoEstoque)
+        public virtual Entidades.Estoque ObterPorCodigo(int codigoEstoque)
         {
             var banco = File.ReadAllText(Host);
 
