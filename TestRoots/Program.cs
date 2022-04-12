@@ -13,7 +13,7 @@ namespace ClienteTestRoots
             Console.WriteLine("Hello World!");
             
             var tipoBebiba = new TipoBebidaServiceTeste();
-            tipoBebiba.redarTodosTestes();
+            tipoBebiba.rodarTodosTestes();
         }
 
         public void testValidarDadosClientes()
