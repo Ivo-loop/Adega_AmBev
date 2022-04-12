@@ -145,8 +145,6 @@ namespace TestRoots
         public void Deve_retornar_mensagem_de_falso_ao_buscar_um_produto_por_id()
         {
             limpar_banco();
-            //var produtos = _produtoService.GetId(1);
-
             try
             {
                 var produtos = _produtoService.GetId(1);
